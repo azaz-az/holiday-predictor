@@ -16,7 +16,7 @@ while True:
             maDoW = maDate.weekday()  # DoW, 即DateOfWeek, 下同
             ndDoW = ndDate.weekday()#unused --IAmREGE
             maInNd = 0
-            if maDoW == 4 and datetime.timedelta(days=-3) <= maDate - ndDate <=\
+            if maDoW >= 4 and datetime.timedelta(days=-3) <= maDate - ndDate <=\
                               datetime.timedelta(days=0):
                 holidayFirst = maDate  # holidayFirst, 即假期的第一天, 下同
                 maInNd = 1
