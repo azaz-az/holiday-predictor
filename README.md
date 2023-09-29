@@ -1,3 +1,5 @@
 # 这是一个国庆假期预测器
 ***
 这个小工具可以预测后续国庆的放假安排，例如什么时候放假、什么时候调休。
+
+如果遇到`ModuleNotFoundError`，请先安装[zhdate](/CutePandaSh/zhdate)模块后再运行本程序。
