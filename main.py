@@ -4,7 +4,7 @@ print('国庆假期预测器\n键入"help"查看帮助')
 while True:
     runCommand = 0
     try:
-        userInputList = (input('>') + ' ' + str(userInput)).split(' ')
+        userInputList = input('>').split(' ')
     except (KeyboardInterrupt, EOFError):
         break
     if userInputList[0] in ('forecast', 'fc'):
@@ -19,20 +19,17 @@ while True:
             if maDoW == 4 and datetime.timedelta(days=-3) <= maDate - ndDate <=\
                               datetime.timedelta(days=0):
                 holidayFirst = maDate  # holidayFirst, 即假期的第一天, 下同
-                holidayDays = 8  # holidayDays, 即假期天数, 下同
                 maInNd = 1
             if maDate == ndDate:
                 holidayFirst = maDate
-                holidayDays = 8
                 maInNd = 1
             if datetime.timedelta(days=0) < maDate - ndDate <= \
                datetime.timedelta(days=7):
                 holidayFirst = ndDate
-                holidayDays = 8
                 maInNd = 1
+            holidayDays = 7 + maInNd  # holidayDays, 即假期天数, 下同
             if not maInNd:
                 holidayFirst = ndDate
-                holidayDays = 7
             holidayFirstDoW = holidayFirst.weekday()
             endDate = holidayFirst + datetime.timedelta(days=holidayDays-1, hours=23, minutes=59, seconds=59)
             endDoW = endDate.weekday()
