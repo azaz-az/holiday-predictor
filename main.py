@@ -40,11 +40,10 @@ def fcnd():
     else:
         lieuDate1 = holidayFirst - datetime.timedelta(days=holidayFirstDoW+1)
         lieuDate2 = endDate + datetime.timedelta(days=5-endDoW)
-    print('国庆假期是'+str(holidayFirst)+' - '+str(endDate))
     if lieuDate2 != 'none':
-        print('调休时间为'+str(lieuDate1)+' / '+str(lieuDate2))
+        return '国庆假期是'+str(holidayFirst)+' - '+str(endDate) , '调休时间为'+str(lieuDate1)+' / '+str(lieuDate2)
     else:
-        print('调休时间为'+str(lieuDate1))
+        return '国庆假期是'+str(holidayFirst)+' - '+str(endDate) , '调休时间为'+str(lieuDate1)
 while True:
     runCommand = 0
     try:
@@ -55,11 +54,11 @@ while True:
         try:
             if int(userInputList[1]) == 0:
                 userInputList = ['fc', datetime.datetime.now().strftime("%Y")]
-                fcnd()
+                print(fcnd())
             elif int(userInputList[1]) < 1949:
                 print('醒醒, '+str(userInputList[1])+'年还没建国, 没有国庆节')
             else:
-                fcnd()
+                print(fcnd())               
         except KeyboardInterrupt:
             break
         except:
@@ -71,7 +70,7 @@ while True:
     if userInputList[0] in ('fclist', 'forecastlist'):
         try:
             for i in range(int(userInputList[2]) - int(userInputList[1])+1):
-                fcnd()
+                print(fcnd())
                 userInputList = ['fc', int(userInputList[1])+1]
             runCommand = 1
         except KeyboardInterrupt:
