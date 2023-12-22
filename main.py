@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from zhdate import ZhDate
 import datetime
 print('国庆假期预测器\n键入"help"查看帮助')
