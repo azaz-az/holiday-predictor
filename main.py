@@ -11,7 +11,7 @@ def fcnd():
     ndDate = datetime.datetime(fcYear, 10, 1) # nd代表National Day, 即国庆节, 下同
     maDoW = maDate.weekday()  # DoW, 即DateOfWeek, 下同
     ndDoW = ndDate.weekday()#unused --IAmREGE
-    maInNd = 0
+    maInNd = 0 #maInNd 即中秋节包含在国庆节内，0代表Flase，1代表True，下同
     if maDoW >= 4 and datetime.timedelta(days=-3) <= maDate - ndDate <=\
                     datetime.timedelta(days=0):
         holidayFirst = maDate  # holidayFirst, 即假期的第一天, 下同
@@ -67,7 +67,7 @@ while True:
                 print('未知的参数' + str(userInputList[1]) + ', 键入"help"以获取帮助.')
             except IndexError:
                 print('请输入要预测的年份!')
-        runCommand = 1
+        runCommand = 1 #标记代码已被运行，接下来就不会输出未找到命令
     if userInputList[0] in ('fclist', 'forecastlist'):
         try:
             for i in range(int(userInputList[2]) - int(userInputList[1])+1):
