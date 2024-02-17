@@ -3,7 +3,7 @@ from zhdate import ZhDate
 import datetime
 
 debug_mode = 0
-print('国庆假期预测器\n键入"help"查看帮助')
+print('假期预测器\n键入"help"查看帮助')
 holiday_first = end_date = lieu_date_1 = lieu_date_2 = 0
 user_input_list = []
 
