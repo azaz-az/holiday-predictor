@@ -164,7 +164,7 @@ while True:
               \n\
               \n<选项>允许的参数值有：\
               \n--national: 预测国庆假期\
-              \n--newyear: 预测新年假期\
+              \n--newyear: 预测元旦假期\
               \n特别注意:选项需要两条横线，而非一条横线')
         run_command = 1
     if user_input_list[0] in ('exit', 'quit'):
