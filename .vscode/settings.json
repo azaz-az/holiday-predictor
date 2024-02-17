@@ -1,0 +1,8 @@
+{
+    "python.analysis.importFormat": "relative",
+    "python.analysis.typeCheckingMode": "strict",
+    "python.languageServer": "Pylance",
+    "python.testing.unittestEnabled": true,
+    "autoDocstring.includeExtendedSummary": true,
+    "autoDocstring.startOnNewLine": false
+}
