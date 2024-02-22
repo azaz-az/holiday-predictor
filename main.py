@@ -1,175 +1,241 @@
-#!/usr/bin/env python3
-from zhdate import ZhDate
+"""
+Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具。
+
+Copyright (C) 2024
+
+原作 azaz-az。由 NebuDr1ft 派生并修改。
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+
 import datetime
 
-debug_mode = 0
-print('假期预测器\n键入"help"查看帮助')
-holiday_first = end_date = lieu_date_1 = lieu_date_2 = 0
-user_input_list = []
+from zhdate import ZhDate  # type: ignore
 
-def forecast_chl(holiday_name):
-    forecast_year = int(user_input_list[1])
-    lieu_date_1 = lieu_date_2 = 'none'  # lieu, 即调休, 下同
-    if holiday_name == '--national':
-        # ma代表Mid-Autumn Festival , 即中秋节, 下同
-        mid_autumn_date = ZhDate(forecast_year, 8, 15).to_datetime()
-        national_day_date = datetime.datetime(forecast_year, 10, 1)  # nd代表National Day, 即国庆节, 下同
-        mid_autumn_dow = mid_autumn_date.weekday()  # DoW, 即DateOfWeek, 下同
-        national_day_dow = national_day_date.weekday()
-        mid_autumn_in_national_day = 0  # maInNd 即中秋节包含在国庆节内，0代表False，1代表True，下同
-    if holiday_name == '--newyear':
-        new_year_date = datetime.datetime(year=forecast_year, month=1, day=1)
-        new_year_dow = new_year_date.weekday()
-    if holiday_name == '--national':
+from data import Data
+
+
+def calculation(given_list: list[str]) -> str:
+    """该函数用于计算假期日期和调休日期。
+
+    该函数计算指定的年份中，用户输入的假期的日期和这个假期的调休情况。
+
+    Args:
+        given_list (list[str]): 传入用户的输入，这是以用空格拆分后的列表形式输入的。
+
+    Returns:
+        str: 返回需要打印的输出字符串。
+    """
+
+    # 下述代码从传入参数中获取必要信息。
+    forecast_year: int = int(given_list[1])
+    holiday_name: str = str(given_list[2])
+    hld_startdate = "None"  # Pylance: reportPossiblyUnboundVariable
+    hld_enddate = "None"  # Pylance: reportPossiblyUnboundVariable
+
+    # 这两个变量定义调休的日期。在随后会被修改，用 "None" 来判定是否有调休出现。
+    lieu_1 = lieu_2 = "None"
+
+    if holiday_name == "--national-day" or holiday_name == "-nd":  # 该部分用于处理国庆假期的调休预测。
         if forecast_year < 1949:
-            return('醒醒, ' + str(user_input_list[1]) + '年还没建国, 没有国庆节')
-        if debug_mode == 1:
-            print(user_input_list)
-        if mid_autumn_dow >= 4 and datetime.timedelta(days=-3) <= mid_autumn_date - national_day_date <= \
-                datetime.timedelta(days=0):
-            holiday_first = mid_autumn_date  # holiday_first, 即假期的第一天, 下同
-            mid_autumn_in_national_day = 1
-        if mid_autumn_date == national_day_date:
-            holiday_first = mid_autumn_date
-            mid_autumn_in_national_day = 1
-        if datetime.timedelta(days=0) < mid_autumn_date - national_day_date <= \
-                datetime.timedelta(days=7):
-            holiday_first = national_day_date
-            mid_autumn_in_national_day = 1
-        holiday_days = 7 + mid_autumn_in_national_day  # holiday_days, 即假期天数, 下同
-        if not mid_autumn_in_national_day:
-            holiday_first = national_day_date
-        holiday_first_dow = holiday_first.weekday()
-        end_date = holiday_first + datetime.timedelta(days=holiday_days - 1, hours=23, minutes=59, seconds=59)
-        end_dow = end_date.weekday()
-        if end_dow == 4:
-            lieu_date_1 = end_date + datetime.timedelta(seconds=1)
-            lieu_date_2 = end_date + datetime.timedelta(days=2)
-        elif holiday_first_dow == 0:
-            lieu_date_1 = holiday_first - datetime.timedelta(days=2)
-            lieu_date_2 = holiday_first - datetime.timedelta(seconds=1)
-        elif holiday_first_dow == 6 and holiday_days == 8:
-            lieu_date_1 = holiday_first - datetime.timedelta(days=1)
+            return "错误的输入。给定年份 " + str(forecast_year) + " 不存在国庆假期。"
         else:
-            lieu_date_1 = holiday_first - datetime.timedelta(days=holiday_first_dow + 1)
-            lieu_date_2 = end_date + datetime.timedelta(days=5 - end_dow)
-    if holiday_name == '--newyear':
-        if debug_mode == 1:
-            print('---Debug Info Start---')
-            print('user_input_list: ', user_input_list)
-        if new_year_dow == 6:
-            # 不调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year-1, month=12, day=31)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=2, hour=23, minute=59, second=59)
-        if new_year_dow == 0:
-            # 不调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year-1, month=12, day=30)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=1, hour=23, minute=59, second=59)
-        if new_year_dow == 1:
-            # 调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year-1, month=12, day=30)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=1, hour=23, minute=59, second=59)
-            lieu_date_1 = datetime.datetime(year=forecast_year-1, month=12, day=29)
-        if new_year_dow == 2:
-            # 不调休
-            holiday_days = 1
-            holiday_first = datetime.datetime(year=forecast_year, month=1, day=1)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=1, hour=23, minute=59, second=59)
-        if new_year_dow == 3:
-            # 调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year, month=1, day=1)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=1, hour=23, minute=59, second=59)
-            lieu_date_1 = datetime.datetime(year=forecast_year, month=1, day=4)
-        if new_year_dow == 4:
-            # 不调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year, month=1, day=1)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=3, hours=23, minutes=59, seconds=59)
-        if new_year_date == 5:
-            # 不调休
-            holiday_days = 3
-            holiday_first = datetime.datetime(year=forecast_year, month=1, day=1)
-            end_date = datetime.datetime(year=forecast_year, month=1, day=3, hours=23, minutes=59, seconds=59)
-        if debug_mode == 1:
-            print('holiday_days=', holiday_days)
-            print('holiday_first=', holiday_first)
-            print('new_year_dow=', new_year_dow)
-            print('end_date=', end_date)
-            print('---Debug Info End---')
-    if lieu_date_2 != 'none':
-        return '假期是' + str(holiday_first) + ' - ' + str(end_date), '调休时间为' + str(lieu_date_1) + ' / ' + str(
-            lieu_date_2)
-    elif lieu_date_1 != 'none':
-        return '假期是' + str(holiday_first) + ' - ' + str(end_date), '调休时间为' + str(lieu_date_1)
-    else:
-        return '假期是' + str(holiday_first) + ' - ' + str(end_date)
+            # 下述代码对中秋节、国庆节的日期进行运算。
+            mid_date = ZhDate(
+                forecast_year, 8, 15
+            ).to_datetime()  # 该变量是中秋节的日期。
+            nati_date = datetime.datetime(
+                forecast_year, 10, 1
+            )  # 该变量是国庆节开始的日期。
+            mid_dateofweek = mid_date.weekday()  # 该变量表明中秋节在周几。
+            # national_day_date_of_week = national_day_date.weekday()
+            is_mid_in_nati: bool = (
+                False  # 该变量用于确定中秋节是否与国庆节相连或被包含其中。
+            )
+            hld_startdate = nati_date  # Pylance: reportPossiblyUnboundVariable
 
-if __name__ == '__main__':
-    while True:
-        run_command = 0
-        try:
-            if debug_mode != 1:
-                user_input_list = input('>').lower().split(' ')
+            # 下述代码对假期开始的日期进行运算。
+            if (
+                mid_dateofweek >= 4
+                and datetime.timedelta(days=-3)
+                <= mid_date - nati_date
+                <= datetime.timedelta(days=0)
+            ) or (mid_date == nati_date):
+                hld_startdate = mid_date
+                is_mid_in_nati = True
+            if (
+                datetime.timedelta(days=0)
+                < mid_date - nati_date
+                <= datetime.timedelta(days=7)
+            ):
+                hld_startdate = nati_date
+                is_mid_in_nati = True
+            if not is_mid_in_nati:
+                hld_startdate = nati_date
+
+            # 下述代码对假期结束的日期进行运算。
+            hld_days = 7 + is_mid_in_nati  # 该变量指示了假期的长度。
+            hld_start_dateofweek = hld_startdate.weekday()  # 该变量表明假期在周几开始。
+            hld_enddate = hld_startdate + datetime.timedelta(
+                days=hld_days - 1, hours=23, minutes=59, seconds=59
+            )  # 该变量是假期结束的日期。
+            hld_end_dateofweek = hld_enddate.weekday()  # 该变量表明假期在周几结束。
+
+            # 下述代码对调休的日期进行运算。
+            if hld_end_dateofweek == 4:
+                lieu_1 = hld_enddate + datetime.timedelta(seconds=1)
+                lieu_2 = hld_enddate + datetime.timedelta(days=2)
+            elif hld_start_dateofweek == 0:
+                lieu_1 = hld_startdate - datetime.timedelta(days=2)
+                lieu_2 = hld_startdate - datetime.timedelta(seconds=1)
+            elif hld_start_dateofweek == 6 and hld_days == 8:
+                lieu_1 = hld_startdate - datetime.timedelta(days=1)
             else:
-                user_input_list = str('fc 2023 --newyear').lower().split(' ')
+                lieu_1 = hld_startdate - datetime.timedelta(
+                    days=hld_start_dateofweek + 1
+                )
+                lieu_2 = hld_enddate + datetime.timedelta(days=5 - hld_end_dateofweek)
+
+    if holiday_name == "--new-year" or holiday_name == "-ny":  # 该部分用于处理元旦假期的调休预测。
+        new_year_date = datetime.datetime(year=forecast_year, month=1, day=1)
+        new_year_dateofweek = new_year_date.weekday()
+
+        hld_startdate = "None"
+        hld_enddate = "None"
+        # 下述代码对元旦假期的调休进行运算。
+        if new_year_dateofweek == 0:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=30)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 1:
+            # 调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=30)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+            lieu_1 = datetime.datetime(year=forecast_year - 1, month=12, day=29)
+        if new_year_dateofweek == 2:
+            # 不调休
+            hld_days = 1
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 3:
+            # 调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+            lieu_1 = datetime.datetime(year=forecast_year, month=1, day=4)
+        if new_year_dateofweek == 4:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 5:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 6:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=31)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=2, hour=23, minute=59, second=59
+            )
+
+    if lieu_1 != "None" and lieu_2 != "None":
+        return (
+            "假期由 "
+            + str(hld_startdate)
+            + " 起，直到 "
+            + str(hld_enddate)
+            + "。调休时间为 "
+            + str(lieu_1.date())
+            + " 和 "
+            + str(lieu_2.date())
+            + "。"
+        )
+    elif lieu_1 != "None":
+        return (
+            "假期由 "
+            + str(hld_startdate)
+            + " 起，直到 "
+            + str(hld_enddate)
+            + "。调休时间为 "
+            + str(lieu_1.date())
+            + "。"
+        )
+    else:
+        return "假期由 " + str(hld_startdate) + " 起，直到 " + str(hld_enddate) + "。"
+
+if __name__ == "__main__":
+    print("Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具")
+    print("键入 help 以查看帮助。")
+
+    LIEU_DATE_1 = LIEU_DATE_2 = 0
+    input_list: list[str] = []  # 初始化 input_list
+
+    while True:
+        execution_flag: bool = (
+            False  # 该变量用于报告用户输入是否命中某个指令。在下面的代码中，用户输入触发对任意指令的处理后，该变量即被设置为 True。
+        )
+
+        try:  # 这段代码判定是否让程序进入调试模式。调试模式默认处于关闭状态。
+            input_list = input("> ").lower().split(" ")
         except (KeyboardInterrupt, EOFError):
+            print("\nHoliday Predictor / 假期预测器 已结束运行。感谢你的使用。\n")
             break
-        if user_input_list[0] in ('forecast', 'fc'):
+
+        if input_list[0] in ("forecast", "fc"):  # 处理用户发起的 forecast 指令请求。
             try:
-                if int(user_input_list[1]) == 0:
-                    user_input_list = ['fc', datetime.datetime.now().strftime("%Y")]
-                    print(forecast_chl(str(user_input_list[2])))
+                print(calculation(input_list))
+            except (KeyboardInterrupt, EOFError):
+                print("\nHoliday Predictor / 假期预测器 已结束运行。感谢你的使用。")
+                break
+            except Exception as e:  # pylint: disable = W0702, W0718
+                print("程序未按预期进行。\n\n可能的原因：")
+                if len(input_list) <= 2:
+                    print("可能缺少了指令、年份 和/或 参数。")
+                elif (input_list[2])[0] == "-" and (input_list[2])[1] != "-":
+                    print(f'输入的参数有误。你想输入 "-{input_list[2]}" 吗？')
                 else:
-                    print(forecast_chl(str(user_input_list[2])))
-            except KeyboardInterrupt:
-                break
-            except:
-                try:
-                    print('未知的参数, 键入"help"以获取帮助.\
-                        \n\
-                        \n快速分析(结果不一定准确):')
-                    if len(user_input_list) <= 2:
-                        print('你可能漏了句尾的选项')
-                    elif (user_input_list[2])[0] == '-' and (user_input_list[2])[1] != '-':
-                        print('选项值需要使用两条横线,而非一条')
-                    else:
-                        print('暂无可用的快速修复.')
-                    print('若按照快速分析的方法进行后仍无法解决,请键入help获得更详细的帮助\
-                        \n如果依然无法解决,请前往本项目的GitHub页面(https://github.com/azaz-az/holiday-predictor)给我提issue.\n')
-                except IndexError:
-                    print('请输入要预测的年份!')
-            run_command = 1  # 标记代码已被运行，接下来就不会输出未找到命令
-        if user_input_list[0] in ('fclist', 'forecastlist'):
-            try:
-                for i in range(int(user_input_list[2]) - int(user_input_list[1]) + 1):
-                    print(forecast_chl(str(user_input_list[2])))
-                    user_input_list = ['fc', int(user_input_list[1]) + 1]
-                run_command = 1
-            except KeyboardInterrupt:
-                break
-            except:
-                try:
-                    print('未知的参数' + str(user_input_list[1], user_input_list[2]) + ', 键入"help"以获取帮助.')
-                except IndexError:
-                    print('请输入要预测的年份!')
-        if user_input_list[0] == 'help':
-            print('帮助信息：\n输入"forecast(可简写为fc) + <年份> + <选项>"即可预测那一年的假期.\
-                \n输入"quit"或"exit"可以退出程序\
-                \n输入"forecastlist"(可简写为fclist) + 第一年年份 + 最后一年年份可获得此区间内的国庆假期\
-                \n(注意:fclist功能暂时只支持预测国庆假期,不支持预测其他假期的安排，后续可能会更新)\
-                \n\
-                \n<选项>允许的参数值有：\
-                \n--national: 预测国庆假期\
-                \n--newyear: 预测元旦假期\
-                \n特别注意:选项需要两条横线，而非一条横线')
-            run_command = 1
-        if user_input_list[0] in ('exit', 'quit'):
+                    print("程序无法定位错误的原因。可能是参数输入错误，也有可能是程序运行错误。")
+                print(f"抛出了异常 {e}。")
+                print('\n如果你不会使用该程序，键入 "help" 以查看帮助。')
+                print(
+                    "如果无法定位程序未按预期运行的原因，请向我们报告错误。https://github.com/NebuDr1ft/holiday-predictor\n"
+                )
+            execution_flag = True  # pylint: disable = C0103
+
+        if input_list[0] == "help":
+            print(Data.help)
+            execution_flag = True # pylint: disable = C0103
+
+        if input_list[0] in ("exit", "quit"):
             break
-        if not run_command:
-            print('未知的参数' + str(user_input_list) + ', 键入"help"以获取帮助.')
-        if debug_mode == run_command == 1:
-            break
+
+        if not execution_flag:
+            print("未知的指令 " + str(input_list[0]) + '。键入 "help" 以查看帮助。')
