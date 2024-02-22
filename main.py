@@ -226,7 +226,7 @@ if __name__ == "__main__":
                 print(f"抛出了异常 {e}。")
                 print('\n如果你不会使用该程序，键入 "help" 以查看帮助。')
                 print(
-                    "如果无法定位程序未按预期运行的原因，请向我们报告错误。https://github.com/NebuDr1ft/holiday-predictor\n"
+                    "如果无法定位程序未按预期运行的原因，请向我们报告错误。https://github.com/azaz-az/holiday-predictor\n"
                 )
             execution_flag = True  # pylint: disable = C0103
 
