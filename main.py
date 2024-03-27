@@ -190,8 +190,7 @@ def calculation(given_list: list[str]) -> str:
         return "假期由 " + str(hld_startdate) + " 起，直到 " + str(hld_enddate) + "。"
 
 if __name__ == "__main__":
-    print("Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具")
-    print("键入 help 以查看帮助。")
+    print("Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具\n键入 help 以查看帮助。")
 
     LIEU_DATE_1 = LIEU_DATE_2 = 0
     input_list: list[str] = []  # 初始化 input_list
