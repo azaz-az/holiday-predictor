@@ -17,6 +17,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+from typing import List
+
 import datetime
 
 from zhdate import ZhDate  # type: ignore
@@ -24,7 +26,7 @@ from zhdate import ZhDate  # type: ignore
 from data import Data
 
 
-def calculation(given_list: list[str]) -> str:
+def calculation(given_list: List[str]) -> str:
     """该函数用于计算假期日期和调休日期。
 
     该函数计算指定的年份中，用户输入的假期的日期和这个假期的调休情况。
@@ -105,7 +107,7 @@ def calculation(given_list: list[str]) -> str:
                 )
                 lieu_2 = hld_enddate + datetime.timedelta(days=5 - hld_end_dateofweek)
 
-    if holiday_name == "--new-year" or holiday_name == "-ny":  # 该部分用于处理元旦假期的调休预测。
+    if holiday_name in ("--new-year", "-ny"):  # 该部分用于处理元旦假期的调休预测。
         new_year_date = datetime.datetime(year=forecast_year, month=1, day=1)
         new_year_dateofweek = new_year_date.weekday()
 
