@@ -1,8 +1,6 @@
 """
 Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具。
 
-贡献者名单: 请查阅 README.md 文件
-
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
