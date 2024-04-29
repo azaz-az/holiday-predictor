@@ -6,6 +6,9 @@
 
 ***
 
+> [!WARNING]
+> 此版本为 Alpha 版本，包含仍在开发中的新功能，可能不稳定。
+
 这个小工具可以预测后续国庆或元旦的放假安排, 例如什么时候放假、什么时候调休。
 
 本项目使用了[zhdate](https://github.com/CutePandaSh/zhdate)模块。使用GPL3.0协议开放源代码。

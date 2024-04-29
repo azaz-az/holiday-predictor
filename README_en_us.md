@@ -6,6 +6,9 @@
 
 ***
 
+> [!WARNING]
+> This release is Alpha and contains new features that are still in development and may be unstable.
+
 This gadget can predict the subsequent National Day or New Year's Day holiday schedule, such as when to take a vacation, when to transfer the holiday.
 
 This project uses the [zhdate](https://github.com/CutePandaSh/zhdate) module. It is open source under GPL 3.0.
