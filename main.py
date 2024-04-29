@@ -164,6 +164,75 @@ def calculation(given_list: List[str]) -> str:
                 year=forecast_year, month=1, day=2, hour=23, minute=59, second=59
             )
 
+    if holiday_name in ("--qing-ming", "-qm"):  # 该部分用于处理清明假期的调休预测。
+        if forecast_year % 4 == 0:
+            if forecast_year % 400 == 0:
+                qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=4)
+            elif forecast_year % 100 == 0:
+                qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=5)
+            else:
+                qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=4)
+        else:
+            qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=5)
+        # qing_ming_dateofweek = qing_ming_date.weekday() 
+        print("清明日期为" + str(qing_ming_date))
+        hld_startdate = "None"
+        hld_enddate = "None"
+        # 下述代码对清明假期的调休进行运算。
+        '''
+        if new_year_dateofweek == 0:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=30)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 1:
+            # 调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=30)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+            lieu_1 = datetime.datetime(year=forecast_year - 1, month=12, day=29)
+        if new_year_dateofweek == 2:
+            # 不调休
+            hld_days = 1
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 3:
+            # 调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
+            )
+            lieu_1 = datetime.datetime(year=forecast_year, month=1, day=4)
+        if new_year_dateofweek == 4:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 5:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year, month=1, day=1)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
+            )
+        if new_year_dateofweek == 6:
+            # 不调休
+            hld_days = 3
+            hld_startdate = datetime.datetime(year=forecast_year - 1, month=12, day=31)
+            hld_enddate = datetime.datetime(
+                year=forecast_year, month=1, day=2, hour=23, minute=59, second=59
+            )
+        '''
+
     if lieu_1 != "None" and lieu_2 != "None":
         return (
             "假期由 "
@@ -190,7 +259,7 @@ def calculation(given_list: List[str]) -> str:
         return "假期由 " + str(hld_startdate) + " 起，直到 " + str(hld_enddate) + "。"
 
 if __name__ == "__main__":
-    print("Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具\n键入 help 以查看帮助。")
+    print("\nHoliday Predictor / 假期预测器 - 基于 Python 的调休预测工具\n键入 help 以查看帮助。")
 
     LIEU_DATE_1 = LIEU_DATE_2 = 0
     input_list: list[str] = []  # 初始化 input_list
