@@ -175,7 +175,6 @@ def calculation(given_list: List[str]) -> str:
         else:
             qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=5)
         qing_ming_dateofweek = qing_ming_date.weekday() 
-        print("清明日期为" + str(qing_ming_date))
         hld_startdate = "None"
         hld_enddate = "None"
         # 下述代码对清明假期的调休进行运算。
