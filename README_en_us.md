@@ -7,7 +7,7 @@
 ***
 
 > [!WARNING]
-> This release is Alpha and contains new features that are still in development and may be unstable.
+> This gadget is only used as a prediction of holiday arrangements, which is not necessarily accurate, and is for reference purposes only and does not fully represent the arrangement of holidays.
 
 This gadget can predict the subsequent National Day or New Year's Day holiday schedule, such as when to take a vacation, when to transfer the holiday.
 
