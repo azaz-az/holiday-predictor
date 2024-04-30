@@ -222,7 +222,7 @@ def calculation(given_list: List[str]) -> str:
         duan_wu_dateofweek = duan_wu_date.weekday() 
         hld_startdate = "None"
         hld_enddate = "None"
-        # 下述代码对清明假期的调休进行运算。
+        # 下述代码对端午假期的调休进行运算。
         
         if duan_wu_dateofweek == 0:
             # 不调休
