@@ -10,25 +10,13 @@ class Data:
     该类存储了部分程序运行时需要的信息。
     """
 
-    new_year_days        = [ 3,  3,  1,  3,  3,  3,  3]
+    # 以下这四行存储的是所有3天假期的放假安排，这些数据代表与节日当天差的天数
+    hld_3days_days            = [ 3,  3,  1,  3,  3,  3,  3]
+    hld_3days_start_delta_day = [-2, -2,  0,  0,  0,  0, -1]
+    hld_3days_end_delta_day   = [ 0,  0,  0,  2,  2,  2,  1]
+    hld_3days_lieu1_delta_day = [None, -3, None,  3, None, None, None]
 
-    new_year_start_year  = [-1, -1,  0,  0,  0,  0, -1]
-    new_year_start_month = [12, 12,  1,  1,  1,  1, 12]
-    new_year_start_day   = [30, 30,  1,  1,  1,  1, 31]
-
-    new_year_emd_year    = [-1, -1,  0,  0,  0,  0, -1]
-    new_year_end_month   = [ 1,  1,  1,  1,  1,  1,  1]
-    new_year_end_day     = [ 1,  1,  1,  3,  3,  3,  2]
-
-    new_year_lieu1_year  = [None, -1, None,  0, None, None, None]
-    new_year_lieu1_month = [None, 12, None,  1, None, None, None]
-    new_year_lieu1_day   = [None, 29, None,  4, None, None, None]
-
-    qing_ming_days            = [ 3,  3,  1,  3,  3,  3,  3]
-    qing_ming_start_delta_day = [-2, -2,  0,  0,  0,  0, -1]
-    qing_ming_end_delta_day   = [ 0,  0,  0,  2,  2,  2,  1]
-    qing_ming_lieu1_delta_day = [None, -3, None,  3, None, None, None]
-
+    # 以下这五行存储的是五一假期的放假安排，这些数据代表与节日当天差的天数
     may_day_days            = [ 5,  5,  5,  5,  5,  5,  5]
     may_day_start_delta_day = [-2, -3,  0,  0,  0,  0, -1]
     may_day_end_delta_day   = [ 2,  1,  4,  4,  4,  4,  3]
