@@ -3,6 +3,7 @@
 该模块存储了部分程序运行时所需要的信息。
 """
 
+from typing import ClassVar, Dict, Optional, Tuple
 
 class Data:
     """存储一些程序所需信息的类。
@@ -11,19 +12,46 @@ class Data:
     """
 
     # 以下这四行存储的是所有3天假期的放假安排，这些数据代表与节日当天差的天数
-    hld_3days_days            = [ 3,  3,  1,  3,  3,  3,  3]
-    hld_3days_start_delta_day = [-2, -2,  0,  0,  0,  0, -1]
-    hld_3days_end_delta_day   = [ 0,  0,  0,  2,  2,  2,  1]
-    hld_3days_lieu1_delta_day = [None, -3, None,  3, None, None, None]
+    HLD_3DAYS_DAYS: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (3, 3, 1, 3, 3, 3, 3)
+    HLD_3DAYS_START_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (-2, -2,  0,  0,  0,  0, -1)
+    HLD_3DAYS_END_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (0, 0, 0, 2, 2, 2, 1)
+    HLD_3DAYS_LIEU1_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (None, -3, None, 3, None, None, None)
 
     # 以下这五行存储的是五一假期的放假安排，这些数据代表与节日当天差的天数
-    international_labours_day_days            = [ 5,  5,  5,  5,  5,  5,  5]
-    international_labours_day_start_delta_day = [-2, -3,  0,  0,  0,  0, -1]
-    international_labours_day_end_delta_day   = [ 2,  1,  4,  4,  4,  4,  3]
-    international_labours_day_lieu1_delta_day = [-8, -9, -3, -4, -5, -6, -7]
-    international_labours_day_lieu2_delta_day = [ 5,  4, 10,  9,  8,  7,  6]
+    INTERNATIONAL_LABOURS_DAY_DAYS: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (5, 5, 5, 5, 5, 5, 5)
+    INTERNATIONAL_LABOURS_DAY_START_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (-2, -3, 0, 0, 0, 0, -1)
+    INTERNATIONAL_LABOURS_DAY_END_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (2, 1, 4, 4, 4, 4, 3)
+    INTERNATIONAL_LABOURS_DAY_LIEU1_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (-8, -9, -3, -4, -5, -6, -7)
+    INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY: ClassVar[Tuple[
+        Optional[int], Optional[int], Optional[int], Optional[int],
+        Optional[int], Optional[int], Optional[int]
+    ]] = (5, 4, 10, 9, 8, 7, 6)
 
-    help = (
+    help: ClassVar[str] = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
         "用法：\n"
         "    [command] [year] [argument] [second_argument]\n"
@@ -62,8 +90,13 @@ class Data:
         "    由于部分兼容性问题，forecastlist 或 fclist 指令已从 Holiday Predictor / 假期预测器 中移除。\n"
     )
 
-    international_labours_day_note = ("NOTE: 五一的放假方式经历过两次修改。\n"
-                    "      最早，五一放假七天；后来，五一放假三天；时至今日，五一放假五天。\n"
-                    "      在本程序中，统一以放假五天为准。\n"
-                    "      因此，在预测以前的五一假期时，本程序给出的结果并不准确。\n"
-    )
+    help_i18n: ClassVar[Dict[str, str]] = {"zh_hans": help}
+
+    international_labours_day_note: ClassVar[str] = """NOTE: 五一的放假方式经历过两次修改。
+      最早，五一放假七天；后来，五一放假三天；时至今日，五一放假五天。
+      在本程序中，统一以放假五天为准。
+      因此，在预测以前的五一假期时，本程序给出的结果并不准确。\n"""
+
+    international_labours_day_note_i18n: ClassVar[Dict[str, str]] = {
+        "zh_hans": international_labours_day_note
+    }
