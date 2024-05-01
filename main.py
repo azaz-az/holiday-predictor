@@ -259,6 +259,7 @@ def calculation(given_list: List[str]) -> str:
             hld_enddate = duan_wu_date + datetime.timedelta(days=1)
 
     elif holiday_name in ("--may-day", "-md"):  # 该部分用于处理五一假期的调休预测。
+        print(Data.may_day_note)
         may_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
         may_day_dateofweek: int = may_day_date.weekday()
         # 下述代码对五一假期的调休进行运算。
@@ -271,10 +272,11 @@ def calculation(given_list: List[str]) -> str:
             lieu_2 = may_day_date + datetime.timedelta(days=5)
         elif may_day_dateofweek == 1:
             # 调休
-            hld_days = 3
-            hld_startdate = may_day_date - datetime.timedelta(days=2)
-            hld_enddate = may_day_date
-            lieu_1 = may_day_date - datetime.timedelta(days=3)
+            hld_days = 5
+            hld_startdate = may_day_date - datetime.timedelta(days=3)
+            hld_enddate = may_day_date + datetime.timedelta(days=1)
+            lieu_1 = may_day_date - datetime.timedelta(days=9)
+            lieu_2 = may_day_date + datetime.timedelta(days=4)
         elif may_day_dateofweek == 2:
             # 不调休
             hld_days = 1
