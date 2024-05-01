@@ -24,7 +24,7 @@ class Data:
         "    --new-year 或 -ny ------------- 预测元旦假期。\n"
         "    --qing-ming 或 -qm ------------ 预测清明假期。\n"
         "    --duan-wu 或 -dw -------------- 预测端午假期。\n"
-        "    --mid-autumn 或 -ma ----------- 预测端午假期。\n"
+        "    --mid-autumn 或 -ma ----------- 预测中秋假期。\n"
         "\n"
         "第二参数 (second_argument)：\n"
         "    --only-return-days ------------ 仅输出假期天数。\n"
