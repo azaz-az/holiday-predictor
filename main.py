@@ -169,24 +169,24 @@ def calculation(given_list: List[str]) -> str:
                 duan_wu_date + datetime.timedelta(
                     Data.hld_3days_lieu1_delta_day[duan_wu_dateofweek]) # type: ignore
 
-    elif holiday_name in ("--may-day", "-md"):  # 该部分用于处理五一假期的调休预测。
+    elif holiday_name in ("--international-labours-day", "-ilb"):  # 该部分用于处理五一假期的调休预测。
         if not '--do-not-output-notes' in given_list:
-            print(Data.may_day_note)
-        may_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
-        may_day_dateofweek: int = may_day_date.weekday()
+            print(Data.international_labours_day_note)
+        international_labours_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
+        international_labours_day_dateofweek: int = international_labours_day_date.weekday()
         # 下述代码对五一假期的调休进行运算。
-        hld_days = Data.may_day_days[may_day_dateofweek]
+        hld_days = Data.international_labours_day_days[international_labours_day_dateofweek]
         hld_startdate = \
-            may_day_date + datetime.timedelta(
-                Data.may_day_start_delta_day[may_day_dateofweek])  
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_start_delta_day[international_labours_day_dateofweek])  
         hld_enddate = \
-            may_day_date + datetime.timedelta(Data.may_day_end_delta_day[may_day_dateofweek])
+            international_labours_day_date + datetime.timedelta(Data.international_labours_day_end_delta_day[international_labours_day_dateofweek])
         lieu_1 = \
-            may_day_date + datetime.timedelta(
-                Data.may_day_lieu1_delta_day[may_day_dateofweek])
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_lieu1_delta_day[international_labours_day_dateofweek])
         lieu_2 = \
-            may_day_date + datetime.timedelta(
-                Data.may_day_lieu2_delta_day[may_day_dateofweek])
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_lieu2_delta_day[international_labours_day_dateofweek])
 
     elif holiday_name in ("--mid-autumn", "-ma"):  # 该部分用于处理中秋假期的调休预测。
         mid_autumn_date: datetime.datetime = ZhDate(forecast_year, 8, 15).to_datetime()

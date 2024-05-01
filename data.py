@@ -17,11 +17,11 @@ class Data:
     hld_3days_lieu1_delta_day = [None, -3, None,  3, None, None, None]
 
     # 以下这五行存储的是五一假期的放假安排，这些数据代表与节日当天差的天数
-    may_day_days            = [ 5,  5,  5,  5,  5,  5,  5]
-    may_day_start_delta_day = [-2, -3,  0,  0,  0,  0, -1]
-    may_day_end_delta_day   = [ 2,  1,  4,  4,  4,  4,  3]
-    may_day_lieu1_delta_day = [-8, -9, -3, -4, -5, -6, -7]
-    may_day_lieu2_delta_day = [ 5,  4, 10,  9,  8,  7,  6]
+    international_labours_day_days            = [ 5,  5,  5,  5,  5,  5,  5]
+    international_labours_day_start_delta_day = [-2, -3,  0,  0,  0,  0, -1]
+    international_labours_day_end_delta_day   = [ 2,  1,  4,  4,  4,  4,  3]
+    international_labours_day_lieu1_delta_day = [-8, -9, -3, -4, -5, -6, -7]
+    international_labours_day_lieu2_delta_day = [ 5,  4, 10,  9,  8,  7,  6]
 
     help = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
@@ -33,12 +33,12 @@ class Data:
         "    quit 或 exit ------------------ 退出程序。\n"
         "\n"
         "参数 (argument)：\n"
-        "    --new-year 或 -ny ------------- 预测元旦假期。\n"
-        "    --qing-ming 或 -qm ------------ 预测清明假期。\n"
-        "    --may-day 或 -md -------------- 预测五一假期。\n"
-        "    --duan-wu 或 -dw -------------- 预测端午假期。\n"
-        "    --mid-autumn 或 -ma ----------- 预测中秋假期。\n"
-        "    --national-day 或 -nd --------- 预测国庆假期。\n"
+        "    --new-year 或 -ny -------------------- 预测元旦假期。\n"
+        "    --qing-ming 或 -qm ------------------- 预测清明假期。\n"
+        "    --international-labours-day 或 -ilb -- 预测五一假期。\n"
+        "    --duan-wu 或 -dw --------------------- 预测端午假期。\n"
+        "    --mid-autumn 或 -ma ------------------ 预测中秋假期。\n"
+        "    --national-day 或 -nd ---------------- 预测国庆假期。\n"
         "\n"
         "第二参数 (second_argument)：\n"
         "    --only-return-days ------------ 仅输出假期天数。\n"
@@ -56,13 +56,13 @@ class Data:
         "    forecast 2061 --mid-autumn -------- 预测 2061 年的中秋假期。\n"
         "    （该示例与 fc 2061 -ma 等效。）\n"
         "    fc 2061 -ma --only-return-days ---- 预测 2061 年的中秋假期，且只输出假期天数。\n"
-        "    fc 2047 -md --do-not-output-notes - 预测 2061 年的五一假期，且不输出 Note 信息。\n"
+        "    fc 2047 -ilb --do-not-output-notes - 预测 2061 年的五一假期，且不输出 Note 信息。\n"
         "\n"
         "注意：\n"
         "    由于部分兼容性问题，forecastlist 或 fclist 指令已从 Holiday Predictor / 假期预测器 中移除。\n"
     )
 
-    may_day_note = ("NOTE: 五一的放假方式经历过两次修改。\n"
+    international_labours_day_note = ("NOTE: 五一的放假方式经历过两次修改。\n"
                     "      最早，五一放假七天；后来，五一放假三天；最后，五一放假五天。\n"
                     "      在本程序中，统一以放假五天为准。\n"
                     "      因此，在预测以前的五一假期时，本程序给出的结果并不准确。\n"
