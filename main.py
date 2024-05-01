@@ -306,10 +306,12 @@ def calculation(given_list: List[str]) -> str:
             lieu_1 = may_day_date - datetime.timedelta(days=6)
             lieu_1 = may_day_date + datetime.timedelta(days=7)
         elif may_day_dateofweek == 6:
-            # 不调休
+            # 调休
             hld_days = 3
             hld_startdate = may_day_date - datetime.timedelta(days=1)
-            hld_enddate = may_day_date + datetime.timedelta(days=1)
+            hld_enddate = may_day_date + datetime.timedelta(days=3)
+            lieu_1 = may_day_date - datetime.timedelta(days=7)
+            lieu_1 = may_day_date + datetime.timedelta(days=6)
         else:
             raise AssertionError
 
