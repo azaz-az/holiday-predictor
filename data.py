@@ -27,7 +27,7 @@ class Data:
         "    --mid-autumn 或 -ma ----------- 预测端午假期。\n"
         "\n"
         "第二参数 (second_argument)：\n"
-        "    --only-return-days ------------ 仅输出假期天数\n"
+        "    --only-return-days ------------ 仅输出假期天数。\n"
         "\n"
         "示例：\n"
         "    forecast 2024 --national-day ------ 预测 2024 年的国庆假期。\n"
