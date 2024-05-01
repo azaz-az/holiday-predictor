@@ -142,40 +142,18 @@ def calculation(given_list: List[str]) -> str:
             qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=5)
         qing_ming_dateofweek = qing_ming_date.weekday()
         # 下述代码对清明假期的调休进行运算。
-        if qing_ming_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=2)
-            hld_enddate = qing_ming_date
-        elif qing_ming_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=2)
-            hld_enddate = qing_ming_date
-            lieu_1 = qing_ming_date - datetime.timedelta(days=3)
-        elif qing_ming_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date
-        elif qing_ming_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date + datetime.timedelta(days=2)
-            lieu_1 = qing_ming_date + datetime.timedelta(days=3)
-        elif qing_ming_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date + datetime.timedelta(days=2)
-        elif qing_ming_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=1)
-            hld_enddate = qing_ming_date + datetime.timedelta(days=1)
-        else:
-            raise AssertionError
+        hld_days = Data.qing_ming_days[qing_ming_dateofweek]
+        hld_startdate = \
+            qing_ming_date + datetime.timedelta(
+                Data.qing_ming_start_delta_day[qing_ming_dateofweek])
+        
+        hld_enddate = \
+            qing_ming_date + datetime.timedelta(Data.qing_ming_end_delta_day[qing_ming_dateofweek])
+        
+        if Data.qing_ming_lieu1_delta_day[qing_ming_dateofweek] is not None:
+            lieu_1 = \
+                qing_ming_date + datetime.timedelta(
+                    Data.qing_ming_lieu1_delta_day[qing_ming_dateofweek]) # type: ignore
 
     elif holiday_name in ("--duan-wu", "-dw"):  # 该部分用于处理端午假期的调休预测。
         duan_wu_date: datetime.datetime = ZhDate(forecast_year, 5, 5).to_datetime()

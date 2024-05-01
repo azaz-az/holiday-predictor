@@ -24,6 +24,14 @@ class Data:
     new_year_lieu1_month = [None, 12, None,  1, None, None, None]
     new_year_lieu1_day   = [None, 29, None,  4, None, None, None]
 
+    qing_ming_days             = [ 3,  3,  1,  3,  3,  3,  3]
+
+    qing_ming_start_delta_day  = [-2, -2,  0,  0,  0,  0, -1]
+
+    qing_ming_end_delta_day    = [ 0,  0,  0,  2,  2,  2,  1]
+
+    qing_ming_lieu1_delta_day  = [None, -3, None,  3, None, None, None]
+
     help = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
         "用法：\n"
