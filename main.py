@@ -314,11 +314,12 @@ def calculation(given_list: List[str]) -> str:
             lieu_1 = may_day_date + datetime.timedelta(days=6)
         else:
             raise AssertionError
-
     else:
         return "不存在的参数 {name}。".format(name=holiday_name)
 
-    if lieu_1 is not None and lieu_2 is not None:
+    if given_list[3] == '--only-return-days':
+        return (str(hld_days))
+    elif lieu_1 is not None and lieu_2 is not None:
         return ("假期由 {start} 起，直到 {end}，共{day}天。调休时间为 "
                 "{lieu1} 和 {lieu2}。".format(
                    start=hld_startdate,
@@ -327,7 +328,7 @@ def calculation(given_list: List[str]) -> str:
                    lieu2=lieu_2.date(),
                    day=hld_days
                ))
-    if lieu_1 is not None:
+    elif lieu_1 is not None:
         return ("假期由 {start} 起，直到 {end}，共{day}天。调休时间为 "
                 "{lieu}。".format(
                    start=hld_startdate,
@@ -335,9 +336,10 @@ def calculation(given_list: List[str]) -> str:
                    lieu=lieu_1.date(),
                    day=hld_days
                ))
-    return "假期由 {start} 起，直到 {end}，共{day}天。".format(
+    else:
+        return "假期由 {start} 起，直到 {end}，共{day}天。".format(
         start=hld_startdate, end=hld_enddate, day=hld_days
-    )
+        )
 
 if __name__ == "__main__":
     print("\nHoliday Predictor / 假期预测器 - 基于 Python 的调休预测工具\n键入 help 以查看帮助。")
