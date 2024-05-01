@@ -17,6 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 __all__ = ["calculation"]
 
+from types import ModuleType
+
 from typing import List, Optional
 
 import datetime
