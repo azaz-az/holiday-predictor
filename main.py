@@ -113,65 +113,18 @@ def calculation(given_list: List[str]) -> str:
             year=forecast_year, month=1, day=1
         )
         new_year_dateofweek: int = new_year_date.weekday()
-        # 下述代码对元旦假期的调休进行运算。
-        if new_year_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=30
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=30
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-            lieu_1 = datetime.datetime(year=forecast_year-1, month=12, day=29)
-        elif new_year_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-            lieu_1 = datetime.datetime(year=forecast_year, month=1, day=4)
-        elif new_year_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=31
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=2, hour=23, minute=59, second=59
-            )
-        else:
-            raise AssertionError
+        hld_days = Data.hld_3days_days[new_year_dateofweek]
+        hld_startdate = \
+            new_year_date + datetime.timedelta(
+                Data.hld_3days_start_delta_day[new_year_dateofweek])
+        
+        hld_enddate = \
+            new_year_date + datetime.timedelta(Data.hld_3days_end_delta_day[new_year_dateofweek])
+        
+        if Data.hld_3days_lieu1_delta_day[new_year_dateofweek] is not None:
+            lieu_1 = \
+                new_year_date + datetime.timedelta(
+                    Data.hld_3days_lieu1_delta_day[new_year_dateofweek]) # type: ignore
 
     elif holiday_name in ("--qing-ming", "-qm"):  # 该部分用于处理清明假期的调休预测。
         qing_ming_date: datetime.datetime
@@ -186,135 +139,54 @@ def calculation(given_list: List[str]) -> str:
             qing_ming_date = datetime.datetime(year=forecast_year, month=4, day=5)
         qing_ming_dateofweek = qing_ming_date.weekday()
         # 下述代码对清明假期的调休进行运算。
-        if qing_ming_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=2)
-            hld_enddate = qing_ming_date
-        elif qing_ming_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=2)
-            hld_enddate = qing_ming_date
-            lieu_1 = qing_ming_date - datetime.timedelta(days=3)
-        elif qing_ming_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date
-        elif qing_ming_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date + datetime.timedelta(days=2)
-            lieu_1 = qing_ming_date + datetime.timedelta(days=3)
-        elif qing_ming_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date
-            hld_enddate = qing_ming_date + datetime.timedelta(days=2)
-        elif qing_ming_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = qing_ming_date - datetime.timedelta(days=1)
-            hld_enddate = qing_ming_date + datetime.timedelta(days=1)
-        else:
-            raise AssertionError
+        hld_days = Data.hld_3days_days[qing_ming_dateofweek]
+        hld_startdate = \
+            qing_ming_date + datetime.timedelta(
+                Data.hld_3days_start_delta_day[qing_ming_dateofweek])
+        
+        hld_enddate = \
+            qing_ming_date + datetime.timedelta(Data.hld_3days_end_delta_day[qing_ming_dateofweek])
+        
+        if Data.hld_3days_lieu1_delta_day[qing_ming_dateofweek] is not None:
+            lieu_1 = \
+                qing_ming_date + datetime.timedelta(
+                    Data.hld_3days_lieu1_delta_day[qing_ming_dateofweek]) # type: ignore
 
     elif holiday_name in ("--duan-wu", "-dw"):  # 该部分用于处理端午假期的调休预测。
         duan_wu_date: datetime.datetime = ZhDate(forecast_year, 5, 5).to_datetime()
         duan_wu_dateofweek: int = duan_wu_date.weekday()
         # 下述代码对端午假期的调休进行运算。
-        if duan_wu_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = duan_wu_date - datetime.timedelta(days=2)
-            hld_enddate = duan_wu_date
-        elif duan_wu_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = duan_wu_date - datetime.timedelta(days=2)
-            hld_enddate = duan_wu_date
-            lieu_1 = duan_wu_date - datetime.timedelta(days=3)
-        elif duan_wu_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = duan_wu_date
-            hld_enddate = duan_wu_date
-        elif duan_wu_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = duan_wu_date
-            hld_enddate = duan_wu_date + datetime.timedelta(days=2)
-            lieu_1 = duan_wu_date + datetime.timedelta(days=3)
-        elif duan_wu_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = duan_wu_date
-            hld_enddate = duan_wu_date + datetime.timedelta(days=2)
-        elif duan_wu_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = duan_wu_date - datetime.timedelta(days=1)
-            hld_enddate = duan_wu_date + datetime.timedelta(days=1)
+        hld_days = Data.hld_3days_days[duan_wu_dateofweek]
+        hld_startdate = \
+            duan_wu_date + datetime.timedelta(
+                Data.hld_3days_start_delta_day[duan_wu_dateofweek])
+        
+        hld_enddate = \
+            duan_wu_date + datetime.timedelta(Data.hld_3days_end_delta_day[duan_wu_dateofweek])
+        
+        if Data.hld_3days_lieu1_delta_day[duan_wu_dateofweek] is not None:
+            lieu_1 = \
+                duan_wu_date + datetime.timedelta(
+                    Data.hld_3days_lieu1_delta_day[duan_wu_dateofweek]) # type: ignore
 
-    elif holiday_name in ("--may-day", "-md"):  # 该部分用于处理五一假期的调休预测。
+    elif holiday_name in ("--international-labours-day", "-ilb"):  # 该部分用于处理五一假期的调休预测。
         if not '--do-not-output-notes' in given_list:
-            print(Data.may_day_note)
-        may_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
-        may_day_dateofweek: int = may_day_date.weekday()
+            print(Data.international_labours_day_note)
+        international_labours_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
+        international_labours_day_dateofweek: int = international_labours_day_date.weekday()
         # 下述代码对五一假期的调休进行运算。
-        if may_day_dateofweek == 0:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date - datetime.timedelta(days=2)
-            hld_enddate = may_day_date + datetime.timedelta(days=2)
-            lieu_1 = may_day_date - datetime.timedelta(days=8)
-            lieu_2 = may_day_date + datetime.timedelta(days=5)
-        elif may_day_dateofweek == 1:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date - datetime.timedelta(days=3)
-            hld_enddate = may_day_date + datetime.timedelta(days=1)
-            lieu_1 = may_day_date - datetime.timedelta(days=9)
-            lieu_2 = may_day_date + datetime.timedelta(days=4)
-        elif may_day_dateofweek == 2:
-            # 不调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=3)
-            lieu_2 = may_day_date + datetime.timedelta(days=10)
-        elif may_day_dateofweek == 3:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=4)
-            lieu_1 = may_day_date + datetime.timedelta(days=9)
-        elif may_day_dateofweek == 4:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=5)
-            lieu_1 = may_day_date + datetime.timedelta(days=8)
-        elif may_day_dateofweek == 5:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=6)
-            lieu_1 = may_day_date + datetime.timedelta(days=7)
-        elif may_day_dateofweek == 6:
-            # 调休
-            hld_days = 3
-            hld_startdate = may_day_date - datetime.timedelta(days=1)
-            hld_enddate = may_day_date + datetime.timedelta(days=3)
-            lieu_1 = may_day_date - datetime.timedelta(days=7)
-            lieu_1 = may_day_date + datetime.timedelta(days=6)
-        else:
-            raise AssertionError
+        hld_days = Data.international_labours_day_days[international_labours_day_dateofweek]
+        hld_startdate = \
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_start_delta_day[international_labours_day_dateofweek])  
+        hld_enddate = \
+            international_labours_day_date + datetime.timedelta(Data.international_labours_day_end_delta_day[international_labours_day_dateofweek])
+        lieu_1 = \
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_lieu1_delta_day[international_labours_day_dateofweek])
+        lieu_2 = \
+            international_labours_day_date + datetime.timedelta(
+                Data.international_labours_day_lieu2_delta_day[international_labours_day_dateofweek])
 
     elif holiday_name in ("--mid-autumn", "-ma"):  # 该部分用于处理中秋假期的调休预测。
         mid_autumn_date: datetime.datetime = ZhDate(forecast_year, 8, 15).to_datetime()
@@ -325,38 +197,18 @@ def calculation(given_list: List[str]) -> str:
                 return calculation(['fc', str(forecast_year), '-nd', '--only-return-days'])
             else:
                 return calculation(['fc', str(forecast_year), '-nd'])
-        if mid_autumn_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = mid_autumn_date - datetime.timedelta(days=2)
-            hld_enddate = mid_autumn_date
-        elif mid_autumn_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = mid_autumn_date - datetime.timedelta(days=2)
-            hld_enddate = mid_autumn_date
-            lieu_1 = mid_autumn_date - datetime.timedelta(days=3)
-        elif mid_autumn_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = mid_autumn_date
-            hld_enddate = mid_autumn_date
-        elif mid_autumn_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = mid_autumn_date
-            hld_enddate = mid_autumn_date + datetime.timedelta(days=2)
-            lieu_1 = mid_autumn_date + datetime.timedelta(days=3)
-        elif mid_autumn_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = mid_autumn_date
-            hld_enddate = mid_autumn_date + datetime.timedelta(days=2)
-        elif mid_autumn_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = mid_autumn_date - datetime.timedelta(days=1)
-            hld_enddate = mid_autumn_date + datetime.timedelta(days=1)
+        hld_days = Data.hld_3days_days[mid_autumn_dateofweek]
+        hld_startdate = \
+            mid_autumn_date + datetime.timedelta(
+                Data.hld_3days_start_delta_day[mid_autumn_dateofweek])
+        
+        hld_enddate = \
+            mid_autumn_date + datetime.timedelta(Data.hld_3days_end_delta_day[mid_autumn_dateofweek])
+        
+        if Data.hld_3days_lieu1_delta_day[mid_autumn_dateofweek] is not None:
+            lieu_1 = \
+                mid_autumn_date + datetime.timedelta(
+                    Data.hld_3days_lieu1_delta_day[mid_autumn_dateofweek]) # type: ignore
         
     else:
         return "不存在的参数 {name}。".format(name=holiday_name)
