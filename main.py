@@ -198,57 +198,20 @@ def calculation(given_list: List[str]) -> str:
         may_day_date: datetime.datetime = datetime.datetime(year=forecast_year, month=5, day=1)
         may_day_dateofweek: int = may_day_date.weekday()
         # 下述代码对五一假期的调休进行运算。
-        if may_day_dateofweek == 0:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date - datetime.timedelta(days=2)
-            hld_enddate = may_day_date + datetime.timedelta(days=2)
-            lieu_1 = may_day_date - datetime.timedelta(days=8)
-            lieu_2 = may_day_date + datetime.timedelta(days=5)
-        elif may_day_dateofweek == 1:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date - datetime.timedelta(days=3)
-            hld_enddate = may_day_date + datetime.timedelta(days=1)
-            lieu_1 = may_day_date - datetime.timedelta(days=9)
-            lieu_2 = may_day_date + datetime.timedelta(days=4)
-        elif may_day_dateofweek == 2:
-            # 不调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=3)
-            lieu_2 = may_day_date + datetime.timedelta(days=10)
-        elif may_day_dateofweek == 3:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=4)
-            lieu_1 = may_day_date + datetime.timedelta(days=9)
-        elif may_day_dateofweek == 4:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=5)
-            lieu_1 = may_day_date + datetime.timedelta(days=8)
-        elif may_day_dateofweek == 5:
-            # 调休
-            hld_days = 5
-            hld_startdate = may_day_date
-            hld_enddate = may_day_date + datetime.timedelta(days=4)
-            lieu_1 = may_day_date - datetime.timedelta(days=6)
-            lieu_1 = may_day_date + datetime.timedelta(days=7)
-        elif may_day_dateofweek == 6:
-            # 调休
-            hld_days = 3
-            hld_startdate = may_day_date - datetime.timedelta(days=1)
-            hld_enddate = may_day_date + datetime.timedelta(days=3)
-            lieu_1 = may_day_date - datetime.timedelta(days=7)
-            lieu_1 = may_day_date + datetime.timedelta(days=6)
-        else:
-            raise AssertionError
+        hld_days = Data.may_day_days[may_day_dateofweek]
+        hld_startdate = \
+            may_day_date + datetime.timedelta(
+                Data.may_day_start_delta_day[may_day_dateofweek])
+        
+        hld_enddate = \
+            may_day_date + datetime.timedelta(Data.may_day_end_delta_day[may_day_dateofweek])
+        
+        lieu_1 = \
+            may_day_date + datetime.timedelta(
+                Data.may_day_lieu1_delta_day[may_day_dateofweek])
+        lieu_2 = \
+            may_day_date + datetime.timedelta(
+                Data.may_day_lieu2_delta_day[may_day_dateofweek])
 
     elif holiday_name in ("--mid-autumn", "-ma"):  # 该部分用于处理中秋假期的调休预测。
         mid_autumn_date: datetime.datetime = ZhDate(forecast_year, 8, 15).to_datetime()
