@@ -21,7 +21,7 @@ from typing import List, Optional
 
 import datetime
 
-from zhdate import ZhDate # type: ignore
+ZhDate = __import__("zhdate").ZhDate
 
 from data import Data
 
