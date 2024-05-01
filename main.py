@@ -43,7 +43,7 @@ def calculation(given_list: List[str]) -> str:
     holiday_name: str = str(given_list[2])
     hld_startdate: Optional[datetime.datetime] = None # type: ignore
     hld_enddate: Optional[datetime.datetime] = None
-    hld_days: int
+    hld_days: int = 0
 
     # 这两个变量定义调休的日期。在随后会被修改，用 "None" 来判定是否有调休出现。
     lieu_1: Optional[datetime.datetime] = None
@@ -319,22 +319,24 @@ def calculation(given_list: List[str]) -> str:
         return "不存在的参数 {name}。".format(name=holiday_name)
 
     if lieu_1 is not None and lieu_2 is not None:
-        return ("假期由 {start} 起，直到 {end}。调休时间为 "
+        return ("假期由 {start} 起，直到 {end}，共{day}天。调休时间为 "
                 "{lieu1} 和 {lieu2}。".format(
                    start=hld_startdate,
                    end=hld_enddate,
                    lieu1=lieu_1.date(),
-                   lieu2=lieu_2.date()
+                   lieu2=lieu_2.date(),
+                   day=hld_days
                ))
     if lieu_1 is not None:
-        return ("假期由 {start} 起，直到 {end}。调休时间为 "
+        return ("假期由 {start} 起，直到 {end}，共{day}天。调休时间为 "
                 "{lieu}。".format(
                    start=hld_startdate,
                    end=hld_enddate,
-                   lieu=lieu_1.date()
+                   lieu=lieu_1.date(),
+                   day=hld_days
                ))
-    return "假期由 {start} 起，直到 {end}。".format(
-        start=hld_startdate, end=hld_enddate
+    return "假期由 {start} 起，直到 {end}，共{day}天。".format(
+        start=hld_startdate, end=hld_enddate, day=hld_days
     )
 
 if __name__ == "__main__":
