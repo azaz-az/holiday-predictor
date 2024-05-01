@@ -42,6 +42,7 @@ class Data:
         "    forecast 2061 --mid-autumn -------- 预测 2061 年的中秋假期。\n"
         "    （该示例与 fc 2061 -ma 等效。）\n"
         "    fc 2061 -ma --only-return-days ---- 预测 2061 年的中秋假期，且只输出假期天数。\n"
+        "    fc 2047 -md --do-not-output-notes - 预测 2061 年的五一假期，且不输出 Note 信息。\n"
         "\n"
         "注意：\n"
         "    由于部分兼容性问题，forecastlist 或 fclist 指令已从 Holiday Predictor / 假期预测器 中移除。\n"
