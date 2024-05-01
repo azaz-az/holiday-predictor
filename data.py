@@ -10,7 +10,7 @@ class Data:
     该类存储了部分程序运行时需要的信息。
     """
 
-    new_year_days        = [ 3,  3,  3,  3,  3,  3,  3]
+    new_year_days        = [ 3,  3,  1,  3,  3,  3,  3]
 
     new_year_start_year  = [-1, -1,  0,  0,  0,  0, -1]
     new_year_start_month = [12, 12,  1,  1,  1,  1, 12]
