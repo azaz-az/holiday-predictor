@@ -317,7 +317,7 @@ def calculation(given_list: List[str]) -> str:
     else:
         return "不存在的参数 {name}。".format(name=holiday_name)
 
-    if given_list[3] == '--only-return-days':
+    if '--only-return-days' in given_list:
         return (str(hld_days))
     elif lieu_1 is not None and lieu_2 is not None:
         return ("假期由 {start} 起，直到 {end}，共{day}天。调休时间为 "
