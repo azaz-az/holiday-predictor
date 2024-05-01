@@ -113,65 +113,21 @@ def calculation(given_list: List[str]) -> str:
             year=forecast_year, month=1, day=1
         )
         new_year_dateofweek: int = new_year_date.weekday()
-        # 下述代码对元旦假期的调休进行运算。
-        if new_year_dateofweek == 0:
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=30
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 1:
-            # 调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=30
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-            lieu_1 = datetime.datetime(year=forecast_year-1, month=12, day=29)
-        elif new_year_dateofweek == 2:
-            # 不调休
-            hld_days = 1
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 3:
-            # 调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=1, hour=23, minute=59, second=59
-            )
-            lieu_1 = datetime.datetime(year=forecast_year, month=1, day=4)
-        elif new_year_dateofweek in (4, 5):
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year, month=1, day=1
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=3, hour=23, minute=59, second=59
-            )
-        elif new_year_dateofweek == 6:
-            # 不调休
-            hld_days = 3
-            hld_startdate = datetime.datetime(
-                year=forecast_year-1, month=12, day=31
-            )
-            hld_enddate = datetime.datetime(
-                year=forecast_year, month=1, day=2, hour=23, minute=59, second=59
-            )
-        else:
-            raise AssertionError
+        hld_days = Data.new_year_days[new_year_dateofweek]
+        hld_startdate = datetime.datetime(
+            year = forecast_year + Data.new_year_start_year[new_year_dateofweek],
+            month = Data.new_year_start_month[new_year_dateofweek],
+            day = Data.new_year_start_day[new_year_dateofweek])
+        hld_enddate = datetime.datetime(
+            year = forecast_year + Data.new_year_emd_year[new_year_dateofweek],
+            month = Data.new_year_end_month[new_year_dateofweek],
+            day = Data.new_year_end_day[new_year_dateofweek])
+
+        if Data.new_year_lieu1_year[new_year_dateofweek] is not None:
+            lieu_1 = datetime.datetime(
+                year = forecast_year + Data.new_year_lieu1_year[new_year_dateofweek], # type: ignore
+                month = Data.new_year_lieu1_month[new_year_dateofweek], # type: ignore
+                day = Data.new_year_lieu1_day[new_year_dateofweek]) # type: ignore
 
     elif holiday_name in ("--qing-ming", "-qm"):  # 该部分用于处理清明假期的调休预测。
         qing_ming_date: datetime.datetime

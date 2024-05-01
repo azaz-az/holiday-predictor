@@ -10,6 +10,20 @@ class Data:
     该类存储了部分程序运行时需要的信息。
     """
 
+    new_year_days        = [ 3,  3,  3,  3,  3,  3,  3]
+
+    new_year_start_year  = [-1, -1,  0,  0,  0,  0, -1]
+    new_year_start_month = [12, 12,  1,  1,  1,  1, 12]
+    new_year_start_day   = [30, 30,  1,  1,  1,  1, 31]
+
+    new_year_emd_year    = [-1, -1,  0,  0,  0,  0, -1]
+    new_year_end_month   = [ 1,  1,  1,  1,  1,  1,  1]
+    new_year_end_day     = [ 1,  1,  1,  3,  3,  3,  2]
+
+    new_year_lieu1_year  = [None, -1, None,  0, None, None, None]
+    new_year_lieu1_month = [None, 12, None,  1, None, None, None]
+    new_year_lieu1_day   = [None, 29, None,  4, None, None, None]
+
     help = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
         "用法：\n"
