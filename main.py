@@ -298,6 +298,13 @@ def calculation(given_list: List[str]) -> str:
             hld_enddate = may_day_date + datetime.timedelta(days=4)
             lieu_1 = may_day_date - datetime.timedelta(days=5)
             lieu_1 = may_day_date + datetime.timedelta(days=8)
+        elif may_day_dateofweek == 5:
+            # 调休
+            hld_days = 5
+            hld_startdate = may_day_date
+            hld_enddate = may_day_date + datetime.timedelta(days=4)
+            lieu_1 = may_day_date - datetime.timedelta(days=6)
+            lieu_1 = may_day_date + datetime.timedelta(days=7)
         elif may_day_dateofweek == 6:
             # 不调休
             hld_days = 3
