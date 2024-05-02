@@ -16,8 +16,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-
-import sys
+from typing import Optional, Tuple
 import datetime
 import tkinter as tk
 
@@ -75,9 +74,9 @@ def calculation(years: str, holiday_type: HolidayType,
             CalculationUtil.mid_autumn(year)
     except Exception as e:
         return "程序未按预期进行。抛出了异常:\n{error!r}".format(error=e)
-    hld_days: int = (hld_enddate-hld_startdate).days + 1
+    hld_days: int = (hld_enddate-hld_startdate).days + 1 # type: ignore
     if only_return_days:
-        return str(hld_days)
+        return str(hld_days) # type: ignore
     if lieu_1 is not None and lieu_2 is not None:
         return ("假期由 {start} 起，直到 {end}，共 {day} 天。"
                 "调休时间为 {lieu1} 和 {lieu2}。".format(
@@ -85,7 +84,7 @@ def calculation(years: str, holiday_type: HolidayType,
                    end=hld_enddate,
                    lieu1=lieu_1.date(),
                    lieu2=lieu_2.date(),
-                   day=hld_days
+                   day=hld_days # type: ignore
                ))
     if lieu_1 is not None:
         return ("假期由 {start} 起，直到 {end}，共 {day} 天。"
@@ -93,10 +92,10 @@ def calculation(years: str, holiday_type: HolidayType,
                    start=hld_startdate,
                    end=hld_enddate,
                    lieu=lieu_1.date(),
-                   day=hld_days
+                   day=hld_days # type: ignore
                ))
     return "假期由 {start} 起，直到 {end}，共 {day} 天。".format(
-        start=hld_startdate, end=hld_enddate, day=hld_days
+        start=hld_startdate, end=hld_enddate, day=hld_days # type: ignore
     )
 
 root: tk.Tk = tk.Tk()
