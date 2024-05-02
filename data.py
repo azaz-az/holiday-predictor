@@ -62,6 +62,7 @@ class Data:
         "\n"
         "参数 (argument)：\n"
         "    --new-year 或 -ny -------------------- 预测元旦假期。\n"
+        "    --spring-festival 或 -sf ------------- 预测春节假期。\n"
         "    --qing-ming 或 -qm ------------------- 预测清明假期。\n"
         "    --international-labours-day 或 -ild -- 预测五一假期。\n"
         "    --duan-wu 或 -dw --------------------- 预测端午假期。\n"
@@ -96,7 +97,16 @@ class Data:
       最早，五一放假七天；后来，五一放假三天；时至今日，五一放假五天。
       在本程序中，统一以放假五天为准。
       因此，在预测以前的五一假期时，本程序给出的结果并不准确。\n"""
+    
+    spring_festival_note: ClassVar[str] = """NOTE: 春节的放假方式经历过两次修改。
+      最早，除夕不放假，且假期共7天；后来，除夕放假，且假期共7天；时至今日，除夕不放假，但放假8天。
+      在本程序中，统一以除夕不放假，但放假8天为准。
+      因此，在预测以前的春节假期时，本程序给出的结果并不准确。\n"""
 
     international_labours_day_note_i18n: ClassVar[Dict[str, str]] = {
         "zh_hans": international_labours_day_note
+    }
+
+    spring_festival_note_i18n: ClassVar[Dict[str, str]] = {
+        "zh_hans": spring_festival_note
     }
