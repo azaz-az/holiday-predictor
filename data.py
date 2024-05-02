@@ -51,6 +51,28 @@ class Data:
         int, int, int
     ]] = (5, 4, 10, 9, 8, 7, 6)
 
+    # 以下这五行存储的是春节假期的放假安排，这些数据代表与节日当天差的天数
+    SPRING_FESTIVAL_DAYS: ClassVar[Tuple[
+        int, int, int, int,
+        int, int, int
+    ]] = (8, 8, 8, 8, 8, 8, 8)
+    SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
+        int, int, int, int,
+        int, int, int
+    ]] = (-2, -3, 0, 0, 0, 0, -1)
+    SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
+        int, int, int, int,
+        int, int, int
+    ]] = (5, 4, 7, 7, 7, 7, 6)
+    SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
+        int, int, int, int,
+        int, int, int
+    ]] = (-8, -9, -3, -4, 8, -6, -7)
+    SPRING_FESTIVAL_LIEU2_DELTA_DAY: ClassVar[Tuple[
+        int, int, int, int,
+        int, int, int
+    ]] = (5, 4, 10, 10, 9, 8, 7)
+
     help: ClassVar[str] = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
         "用法：\n"
@@ -101,7 +123,9 @@ class Data:
     spring_festival_note: ClassVar[str] = """NOTE: 春节的放假方式经历过两次修改。
       最早，除夕不放假，且假期共7天；后来，除夕放假，且假期共7天；时至今日，除夕不放假，但放假8天。
       在本程序中，统一以除夕不放假，但放假8天为准。
-      因此，在预测以前的春节假期时，本程序给出的结果并不准确。\n"""
+      因此，在预测以前的春节假期时，本程序给出的结果并不准确。\n
+      并且，由于在本项目制作春节部分时是第一个除夕不放假，连放8天的春节，没有过往的历史可以参考，\n
+      在预测未来的春节假期时，也不一定准确。"""
 
     international_labours_day_note_i18n: ClassVar[Dict[str, str]] = {
         "zh_hans": international_labours_day_note
