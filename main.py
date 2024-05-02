@@ -121,6 +121,42 @@ class CalculationUtil:
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[new_year_dateofweek] is not None \
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1
+    
+    @staticmethod
+    def spring_festival(year: int) -> Optional[Tuple[
+        datetime.datetime, datetime.datetime, datetime.datetime,
+        datetime.datetime
+    ]]:
+        spring_festival_date: datetime.datetime = \
+        ZhDate(year, 1, 1).to_datetime()
+        spring_festival_dateofweek: int = \
+        spring_festival_date.weekday()
+        # 下述代码对春节假期的调休进行运算。
+        hld_startdate: datetime.datetime = \
+        spring_festival_date + datetime.timedelta(
+            Data.SPRING_FESTIVAL_START_DELTA_DAY[
+                spring_festival_dateofweek
+            ]
+        )
+        hld_enddate: datetime.datetime = \
+        spring_festival_date + datetime.timedelta(
+            Data.SPRING_FESTIVAL_END_DELTA_DAY[
+                spring_festival_dateofweek
+            ]
+        )
+        lieu_1: datetime.datetime = \
+        spring_festival_date + datetime.timedelta(
+            Data.SPRING_FESTIVAL_LIEU1_DELTA_DAY[
+                spring_festival_dateofweek
+            ]
+        )
+        lieu_2: datetime.datetime = \
+        spring_festival_date + datetime.timedelta(
+            Data.SPRING_FESTIVAL_LIEU2_DELTA_DAY[
+                spring_festival_dateofweek
+            ]
+        )
+        return hld_startdate, hld_enddate, lieu_1, lieu_2
 
     @staticmethod
     def qing_ming(year: int) -> Tuple[
@@ -279,6 +315,14 @@ def calculation(given_list: List[str]) -> str:
     elif holiday_name in ("--new-year", "-ny"):  # 该部分用于处理元旦假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
         CalculationUtil.new_year(forecast_year)
+    elif holiday_name in ("--spring-festival", "-sf"):  # 该部分用于处理春节假期的调休预测。\
+        if '--do-not-output-notes' not in given_list:
+            print(Data.spring_festival_note)
+        spring_festival_result: Tuple[
+            datetime.datetime, datetime.datetime, datetime.datetime,
+            datetime.datetime
+        ] = CalculationUtil.spring_festival(forecast_year)  # type: ignore
+        hld_startdate, hld_enddate, lieu_1, lieu_2 = spring_festival_result 
     elif holiday_name in ("--qing-ming", "-qm"):  # 该部分用于处理清明假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
         CalculationUtil.qing_ming(forecast_year)
