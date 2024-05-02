@@ -285,7 +285,7 @@ def calculation(given_list: List[str]) -> str:
     elif holiday_name in ("--duan-wu", "-dw"):  # 该部分用于处理端午假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
         CalculationUtil.duan_wu(forecast_year)
-    elif holiday_name in ("--international-labours-day", "-ilb"):  # 该部分用于处理五一假期的调休预测。\
+    elif holiday_name in ("--international-labours-day", "-ild"):  # 该部分用于处理五一假期的调休预测。\
         if '--do-not-output-notes' not in given_list:
             print(Data.international_labours_day_note)
         international_labours_day_result: Optional[Tuple[
