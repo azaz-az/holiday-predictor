@@ -117,7 +117,7 @@ class CalculationUtil:
 
         lieu_1: Optional[datetime.datetime] = \
         new_year_date + datetime.timedelta(
-            Data.HLD_3DAYS_LIEU1_DELTA_DAY[new_year_dateofweek]
+            Data.HLD_3DAYS_LIEU1_DELTA_DAY[new_year_dateofweek] # type: ignore
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[new_year_dateofweek] is not None \
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1
@@ -144,7 +144,7 @@ class CalculationUtil:
 
         lieu_1: Optional[datetime.datetime] = \
         qing_ming_date + datetime.timedelta(
-            Data.HLD_3DAYS_LIEU1_DELTA_DAY[qing_ming_dateofweek]
+            Data.HLD_3DAYS_LIEU1_DELTA_DAY[qing_ming_dateofweek] # type: ignore
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[qing_ming_dateofweek] is not None \
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1
@@ -168,7 +168,7 @@ class CalculationUtil:
 
         lieu_1: Optional[datetime.datetime] = \
         duan_wu_date + datetime.timedelta(
-            Data.HLD_3DAYS_LIEU1_DELTA_DAY[duan_wu_dateofweek]
+            Data.HLD_3DAYS_LIEU1_DELTA_DAY[duan_wu_dateofweek] # type: ignore
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[duan_wu_dateofweek] is not None \
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1
@@ -240,7 +240,7 @@ class CalculationUtil:
 
         lieu_1: Optional[datetime.datetime] = \
         mid_autumn_date + datetime.timedelta(
-            Data.HLD_3DAYS_LIEU1_DELTA_DAY[mid_autumn_dateofweek]
+            Data.HLD_3DAYS_LIEU1_DELTA_DAY[mid_autumn_dateofweek] # type: ignore
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[mid_autumn_dateofweek] is not None\
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1, None
