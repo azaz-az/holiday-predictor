@@ -3,6 +3,7 @@
 该模块存储了部分程序运行时所需要的信息。
 """
 
+from enum import Enum
 from typing import ClassVar, Dict, Optional, Tuple
 
 class Data:
@@ -12,17 +13,13 @@ class Data:
     """
 
     # 以下这四行存储的是所有3天假期的放假安排，这些数据代表与节日当天差的天数
-    HLD_3DAYS_DAYS: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
-    ]] = (3, 3, 1, 3, 3, 3, 3)
+    HLD_3DAYS_DAYS: ClassVar[Tuple[int, int, int, int, int, int, int]] = \
+    (3, 3, 1, 3, 3, 3, 3)
     HLD_3DAYS_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (-2, -2,  0,  0,  0,  0, -1)
     HLD_3DAYS_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (0, 0, 0, 2, 2, 2, 1)
     HLD_3DAYS_LIEU1_DELTA_DAY: ClassVar[Tuple[
         Optional[int], Optional[int], Optional[int], Optional[int],
@@ -31,46 +28,35 @@ class Data:
 
     # 以下这五行存储的是五一假期的放假安排，这些数据代表与节日当天差的天数
     INTERNATIONAL_LABOURS_DAY_DAYS: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (5, 5, 5, 5, 5, 5, 5)
     INTERNATIONAL_LABOURS_DAY_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (-2, -3, 0, 0, 0, 0, -1)
     INTERNATIONAL_LABOURS_DAY_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (2, 1, 4, 4, 4, 4, 3)
     INTERNATIONAL_LABOURS_DAY_LIEU1_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (-8, -9, -3, -4, -5, -6, -7)
     INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (5, 4, 10, 9, 8, 7, 6)
 
     # 以下这五行存储的是春节假期的放假安排，这些数据代表与节日当天差的天数
-    SPRING_FESTIVAL_DAYS: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
-    ]] = (8, 8, 8, 8, 8, 8, 8)
+    SPRING_FESTIVAL_DAYS: ClassVar[Tuple[int, int, int, int, int, int, int]] =\
+    (8, 8, 8, 8, 8, 8, 8)
     SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (-2, 0, 0, 0, 0, 0, -1)
     SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (5, 7, 7, 7, 7, 7, 6)
     SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (-8, -2, -3, -4, 8, -6, -7)
     SPRING_FESTIVAL_LIEU2_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int,
-        int, int, int
+        int, int, int, int, int, int, int
     ]] = (6, 11, 10, 9, 9, 8, 7)
 
     help: ClassVar[str] = (
@@ -119,7 +105,7 @@ class Data:
       最早，五一放假七天；后来，五一放假三天；时至今日，五一放假五天。
       在本程序中，统一以放假五天为准。
       因此，在预测以前的五一假期时，本程序给出的结果并不准确。\n"""
-    
+
     spring_festival_note: ClassVar[str] = """NOTE: 春节的放假方式经历过两次修改。
       最早，除夕不放假，且假期共7天；后来，除夕放假，且假期共7天；时至今日，除夕不放假，但放假8天。
       在本程序中，统一以除夕不放假，但放假8天为准。
@@ -134,3 +120,19 @@ class Data:
     spring_festival_note_i18n: ClassVar[Dict[str, str]] = {
         "zh_hans": spring_festival_note
     }
+
+class HolidayType(Enum):
+    NATIONAL_DAY = "-nd"
+    ND = "-nd"
+    NEW_YEAR = "-ny"
+    NY = "-ny"
+    SPRING_FESTIVAL = "-sf"
+    SF = "-sf"
+    QING_MING = "-qm"
+    QM = "-qm"
+    DUAN_WU = "-dw"
+    DW = "-dw"
+    INTERNATIONAL_LABOURS_DAY = "-ild"
+    ILD = "-ild"
+    MID_AUTUMN = "-ma"
+    MA = "-ma"

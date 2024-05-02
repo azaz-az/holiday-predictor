@@ -121,40 +121,31 @@ class CalculationUtil:
         ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[new_year_dateofweek] is not None \
         else None # type: ignore
         return hld_startdate, hld_enddate, lieu_1
-    
+
     @staticmethod
-    def spring_festival(year: int) -> Optional[Tuple[
+    def spring_festival(year: int) -> Tuple[
         datetime.datetime, datetime.datetime, datetime.datetime,
         datetime.datetime
-    ]]:
+    ]:
         spring_festival_date: datetime.datetime = \
         ZhDate(year, 1, 1).to_datetime()
-        spring_festival_dateofweek: int = \
-        spring_festival_date.weekday()
+        spring_festival_dateofweek: int = spring_festival_date.weekday()
         # 下述代码对春节假期的调休进行运算。
         hld_startdate: datetime.datetime = \
         spring_festival_date + datetime.timedelta(
-            Data.SPRING_FESTIVAL_START_DELTA_DAY[
-                spring_festival_dateofweek
-            ]
+            Data.SPRING_FESTIVAL_START_DELTA_DAY[spring_festival_dateofweek]
         )
         hld_enddate: datetime.datetime = \
         spring_festival_date + datetime.timedelta(
-            Data.SPRING_FESTIVAL_END_DELTA_DAY[
-                spring_festival_dateofweek
-            ]
+            Data.SPRING_FESTIVAL_END_DELTA_DAY[spring_festival_dateofweek]
         )
         lieu_1: datetime.datetime = \
         spring_festival_date + datetime.timedelta(
-            Data.SPRING_FESTIVAL_LIEU1_DELTA_DAY[
-                spring_festival_dateofweek
-            ]
+            Data.SPRING_FESTIVAL_LIEU1_DELTA_DAY[spring_festival_dateofweek]
         )
         lieu_2: datetime.datetime = \
         spring_festival_date + datetime.timedelta(
-            Data.SPRING_FESTIVAL_LIEU2_DELTA_DAY[
-                spring_festival_dateofweek
-            ]
+            Data.SPRING_FESTIVAL_LIEU2_DELTA_DAY[spring_festival_dateofweek]
         )
         return hld_startdate, hld_enddate, lieu_1, lieu_2
 
@@ -315,13 +306,13 @@ def calculation(given_list: List[str]) -> str:
     elif holiday_name in ("--new-year", "-ny"):  # 该部分用于处理元旦假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
         CalculationUtil.new_year(forecast_year)
-    elif holiday_name in ("--spring-festival", "-sf"):  # 该部分用于处理春节假期的调休预测。\
+    elif holiday_name in ("--spring-festival", "-sf"):  # 该部分用于处理春节假期的调休预测。
         if '--do-not-output-notes' not in given_list:
             print(Data.spring_festival_note)
         spring_festival_result: Tuple[
             datetime.datetime, datetime.datetime, datetime.datetime,
             datetime.datetime
-        ] = CalculationUtil.spring_festival(forecast_year)  # type: ignore
+        ] = CalculationUtil.spring_festival(forecast_year)
         hld_startdate, hld_enddate, lieu_1, lieu_2 = spring_festival_result 
     elif holiday_name in ("--qing-ming", "-qm"):  # 该部分用于处理清明假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
@@ -329,7 +320,7 @@ def calculation(given_list: List[str]) -> str:
     elif holiday_name in ("--duan-wu", "-dw"):  # 该部分用于处理端午假期的调休预测。
         hld_startdate, hld_enddate, lieu_1 = \
         CalculationUtil.duan_wu(forecast_year)
-    elif holiday_name in ("--international-labours-day", "-ild"):  # 该部分用于处理五一假期的调休预测。\
+    elif holiday_name in ("--international-labours-day", "-ild"):  # 该部分用于处理五一假期的调休预测。
         if '--do-not-output-notes' not in given_list:
             print(Data.international_labours_day_note)
         international_labours_day_result: Optional[Tuple[
@@ -429,7 +420,8 @@ if __name__ == "__main__" and len(sys.argv) < 2:
             break
 
         if not execution_flag:
-            print("未知的指令 " + str(input_list[0]) + '。键入 "help" 以查看帮助。')
+            print('未知的指令 {unknown} 。'
+                  '键入 "help" 以查看帮助。'.format(unknown=input_list[0]))
 elif __name__ == "__main__" and len(sys.argv) > 1:
     input_list = sys.argv[1:]
 
@@ -446,7 +438,8 @@ elif __name__ == "__main__" and len(sys.argv) > 1:
             else:
                 print("程序无法定位错误的原因。可能是参数输入错误，也有可能是程序运行错误。")
             print("抛出了异常 {error!r}。".format(error=e))
-            print('\n如果你不会使用该程序，键入 "help" 以查看帮助。')
+            print('\n如果你不会使用该程序，键入 '
+                  '"{arg0} help" 以查看帮助。'.format(arg0=sys.argv[0]))
             print("如果无法定位程序未按预期运行的原因，请向我们报告错误。"
                     "https://github.com/azaz-az/holiday-predictor\n")
             sys.exit(2)
@@ -459,7 +452,7 @@ elif __name__ == "__main__" and len(sys.argv) > 1:
         print('未知的指令 {unknown}。'
                 '键入 "{arg0} help" 以查看帮助。'.format(unknown=input_list[0],
                                                          arg0=sys.argv[0]))
-        print('\n如果你不会使用该程序，键入 "help" 以查看帮助。')
+        print('\n如果你不会使用该程序，键入 "{arg0} help" 以查看帮助。'.format(arg0=sys.argv[0]))
         print("如果无法定位程序未按预期运行的原因，请向我们报告错误。"
                 "https://github.com/azaz-az/holiday-predictor\n")
         sys.exit(1)
