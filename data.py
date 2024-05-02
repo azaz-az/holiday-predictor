@@ -59,19 +59,19 @@ class Data:
     SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int,
         int, int, int
-    ]] = (-2, -3, 0, 0, 0, 0, -1)
+    ]] = (-2, 0, 0, 0, 0, 0, -1)
     SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int,
         int, int, int
-    ]] = (5, 4, 7, 7, 7, 7, 6)
+    ]] = (5, 7, 7, 7, 7, 7, 6)
     SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int,
         int, int, int
-    ]] = (-8, -9, -3, -4, 8, -6, -7)
+    ]] = (-8, -2, -3, -4, 8, -6, -7)
     SPRING_FESTIVAL_LIEU2_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int,
         int, int, int
-    ]] = (5, 4, 10, 10, 9, 8, 7)
+    ]] = (6, 11, 10, 9, 9, 8, 7)
 
     help: ClassVar[str] = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
