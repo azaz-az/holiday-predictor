@@ -115,12 +115,12 @@ class Data:
     
     international_labours_day_note_en_us: ClassVar[str] = """ Note: The International Labour's Day holiday in China has gone through two modifications.
       At the earliest, International Labour's Day was a seven-day holiday; later, International Labour's Day was a three-day holiday; and now, International Labour's Day is a five-day holiday.
-      In this procedure, the five-day holiday is standardized.
+      In this procedure, the five-day holiday is applied in each case.
       Therefore, when predicting past International Labor Day holidays, the program gives inaccurate results. \n"""
 
     spring_festival_note_en_us: ClassVar[str] = """ Note: China's Spring Festival holiday has undergone two revisions.
-      At the earliest, there was no holiday on New Year's Eve and the vacation lasted a total of seven days; later, there was a holiday on New Year's Eve and the vacation lasted a total of seven days; to this day, there is no holiday on New Year's Eve and the vacation lasts a total of eight days.
-      In this process, the expression no holiday on New Year's Eve and eight days of vacation was uniformly used.
+      At the earliest, there was no holiday on New Year's Eve and the holiday lasted a total of seven days; later, there was a holiday on New Year's Eve and the holiday lasted a total of seven days; to this day, there is no holiday on New Year's Eve and the holiday lasts a total of eight days.
+      In this process, the expression no holiday on New Year's Eve and eight days of holiday was uniformly used.
       Therefore, when predicting past Chinese New Year holidays, the program gave inaccurate results.
       In addition, the program did not have past history to refer to when producing the Chinese New Year segment, as it was the first Chinese New Year in which there was no holiday on New Year's Eve and eight consecutive days of holiday.
       Predicting future Chinese New Year holidays may not be accurate. """
