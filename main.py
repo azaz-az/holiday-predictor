@@ -423,16 +423,6 @@ if __name__ == "__main__" and len(sys.argv) < 2:
                   "https://github.com/azaz-az/holiday-predictor\n")
             execution_flag = True  # pylint: disable = C0103
 
-        if input_list[0] == "help":
-            print(Data.help)
-            execution_flag = True # pylint: disable = C0103
-
-        if input_list[0] in ("exit", "quit"):
-            break
-
-        if not execution_flag:
-            print('未知的指令 {unknown} 。'
-                  '键入 "help" 以查看帮助。'.format(unknown=input_list[0]))
 elif __name__ == "__main__" and len(sys.argv) > 1:
     input_list = sys.argv[1:]
 
