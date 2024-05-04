@@ -9,7 +9,7 @@
 > [!WARNING]
 > This gadget is only used as a prediction of holiday arrangements, which is not necessarily accurate, and is for reference purposes only and does not fully represent the arrangement of holidays.
 
-This gadget can predict the subsequent Chinese National Day, New Year's Day, the Dragon Boat Festival, Chinese Tomb Sweeping Day and the Mid-autumn Festival holiday schedule, such as when to take a vacation, when to transfer the holiday.
+This gadget can predict the subsequent Chinese National Day, New Year's Day, the Dragon Boat Festival, Chinese Tomb Sweeping Day and the Mid-autumn Festival holiday schedule, such as when to take a holiday, when to transfer the holiday.
 
 This project uses the [zhdate](https://github.com/CutePandaSh/zhdate) module. It is open source under GPL 3.0.
 
