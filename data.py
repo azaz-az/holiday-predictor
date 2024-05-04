@@ -59,6 +59,10 @@ class Data:
         int, int, int, int, int, int, int
     ]] = (6, 11, 10, 9, 9, 8, 7)
 
+    INT_TO_WEEKDAY: ClassVar[Tuple[
+        str, str, str, str, str, str, str
+    ]] = ('一', '二', '三', '四', '五', '六', '日')
+
     help: ClassVar[str] = (
         "\nHoliday Predictor / 假期预测器 帮助文档\n\n"
         "用法：\n"

@@ -341,24 +341,35 @@ def calculation(given_list: List[str]) -> str:
     if '--only-return-days' in given_list:
         return str(hld_days)
     if lieu_1 is not None and lieu_2 is not None:
-        return ("假期由 {start} 起，直到 {end}，共 {day} 天。"
-                "调休时间为 {lieu1} 和 {lieu2}。".format(
+        return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
+                "调休时间为 {lieu1}（星期{lieu1_dateofweek}）和 {lieu2}（星期{lieu2_dateofweek}）。".format(
                    start=hld_startdate,
-                   end=hld_enddate,
+                   start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],
+                   end=hld_enddate, 
+                   end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],
                    lieu1=lieu_1.date(),
+                   lieu1_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
                    lieu2=lieu_2.date(),
+                   lieu2_dateofweek=Data.INT_TO_WEEKDAY[lieu_2.weekday()],
                    day=hld_days
                ))
     if lieu_1 is not None:
-        return ("假期由 {start} 起，直到 {end}，共 {day} 天。"
-                "调休时间为 {lieu}。".format(
+        return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
+                "调休时间为 {lieu}（星期{lieu_dateofweek}）。".format(
                    start=hld_startdate,
-                   end=hld_enddate,
+                   start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],
+                   end=hld_enddate, 
+                   end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],
                    lieu=lieu_1.date(),
+                   lieu_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
                    day=hld_days
                ))
-    return "假期由 {start} 起，直到 {end}，共 {day} 天。".format(
-        start=hld_startdate, end=hld_enddate, day=hld_days
+    return "假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。".format(
+        start=hld_startdate,
+        start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],
+        end=hld_enddate, 
+        end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],
+        day=hld_days
     )
 input_list: List[str]
 if __name__ == "__main__" and len(sys.argv) < 2:
