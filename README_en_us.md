@@ -1,5 +1,23 @@
 # Holiday Predictor / 假期预测器
 
+<div style="display: flex; align-items: center; justify-content: center; margin: 10px">
+      <img
+        align=center
+        src="https://img.shields.io/github/stars/azaz-az/holiday-predictor?style=for-the-badge&logoColor=%231677ff&labelColor=rgb(89, 89, 89)&color=rgb(3, 126, 187)"
+        style="margin: 0 5px"
+      />
+    <img
+        align=center
+        src="https://img.shields.io/github/watchers/azaz-az/holiday-predictor?style=for-the-badge&logoColor=%231677ff&labelColor=rgb(89, 89, 89)&color=rgb(3, 126, 187)""
+        style="margin: 0 5px"
+      />
+    <img
+        align=center
+        src="https://img.shields.io/github/forks/azaz-az/holiday-predictor?style=for-the-badge&logoColor=%231677ff&labelColor=rgb(89, 89, 89)&color=rgb(3, 126, 187)"
+        style="margin: 0 5px"
+      />
+</div>
+
 ***
 
 [简体中文 (中国大陆)](./README.md) / English (US)
