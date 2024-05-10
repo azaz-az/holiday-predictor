@@ -25,7 +25,6 @@ from main import CalculationUtil
 
 def calculation(years: str, holiday_type: HolidayType,
                 only_return_days: bool = False) -> str:
-    year: int = 0
     try:
         year = int(years)
     except ValueError:

@@ -37,12 +37,8 @@ class CalculationUtil:
         if year < 1949:
             return None
         # 下述代码从传入参数中获取必要信息。
-        hld_startdate: Optional[datetime.datetime] = None  # type: ignore
-        hld_enddate: Optional[datetime.datetime] = None
-        hld_days: int = 0
 
         # 这两个变量定义调休的日期。在随后会被修改，用 "None" 来判定是否有调休出现。
-        lieu_1: Optional[datetime.datetime] = None
         lieu_2: Optional[datetime.datetime] = None
         # 下述代码对中秋节、国庆节的日期进行运算。
         mid_date: datetime.datetime = ZhDate(
@@ -289,11 +285,8 @@ def calculation(given_list: List[str]) -> str:
     # 下述代码从传入参数中获取必要信息。
     forecast_year: int = int(given_list[1])
     holiday_name: str = str(given_list[2])
-    hld_startdate: Optional[datetime.datetime] = None  # type: ignore
-    hld_enddate: Optional[datetime.datetime] = None
 
     # 这两个变量定义调休的日期。在随后会被修改，用 "None" 来判定是否有调休出现。
-    lieu_1: Optional[datetime.datetime] = None
     lieu_2: Optional[datetime.datetime] = None
 
     if holiday_name in ("--national-day", "-nd"):  # 该部分用于处理国庆假期的调休预测。
