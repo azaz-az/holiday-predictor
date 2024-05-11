@@ -1,5 +1,8 @@
 #!python3
 
+"""这是一个本项目的 GUI.
+请不要尝试将其作为模块导入"""
+
 """
 Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具。
 
@@ -16,6 +19,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+
 from typing import Optional, Tuple
 import datetime
 import tkinter as tk

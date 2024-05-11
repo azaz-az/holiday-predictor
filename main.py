@@ -1,3 +1,9 @@
+"""预测中国的假期安排的模块。
+前置模块：zhdate
+用法：CalculationUtil.假期名(年份)
+输出：<假期开始日期>, <假期结束日期>, [调休日期1(若有)], [调休日期2(若有)]
+"""
+
 """
 Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具。
 
@@ -29,6 +35,11 @@ from data import Data
 
 
 class CalculationUtil:
+    """计算假期安排所需的类。
+    用法：CalculationUtil.假期名(年份)
+    输出：<假期开始日期>, <假期结束日期>, [调休日期1(若有)], [调休日期2(若有)]
+    """
+
     @staticmethod
     def national_day(year: int) -> Optional[Tuple[
         datetime.datetime, datetime.datetime, Optional[datetime.datetime],
