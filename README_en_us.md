@@ -29,6 +29,13 @@
 
 This gadget can predict the subsequent Chinese National Day, New Year's Day, the Dragon Boat Festival, Chinese Tomb Sweeping Day and the Mid-autumn Festival holiday schedule, such as when to take a holiday, when to transfer the holiday.
 
+> [!TIP]
+> The gadget can also be imported as a module (Coming Soon).
+> 
+> Module installation method:
+> 
+> (Coming Soon.)
+
 This project uses the [zhdate](https://github.com/CutePandaSh/zhdate) module. It is open source under GPL 3.0.
 
 ***
