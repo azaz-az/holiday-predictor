@@ -23,6 +23,7 @@ import tkinter as tk
 from data import Data, HolidayType
 from main import CalculationUtil
 
+
 def calculation(years: str, holiday_type: HolidayType,
                 only_return_days: bool = False) -> str:
     try:
@@ -31,7 +32,7 @@ def calculation(years: str, holiday_type: HolidayType,
         return "输入的年份有误!"
     if type(holiday_type) is not HolidayType:
         raise AssertionError
-    hld_startdate: Optional[datetime.datetime] = None # type: ignore
+    hld_startdate: Optional[datetime.datetime] = None  # type: ignore
     hld_enddate: Optional[datetime.datetime] = None
     # 这两个变量定义调休的日期。在随后会被修改，用 "None" 来判定是否有调休出现。
     lieu_1: Optional[datetime.datetime] = None
@@ -48,16 +49,16 @@ def calculation(years: str, holiday_type: HolidayType,
             hld_startdate, hld_enddate, lieu_1, lieu_2 = national_day_result
         elif holiday_type == HolidayType.NY:  # 该部分用于处理元旦假期的调休预测。
             hld_startdate, hld_enddate, lieu_1 = \
-            CalculationUtil.new_year(year)
+                CalculationUtil.new_year(year)
         elif holiday_type == HolidayType.SF:  # 该部分用于处理春节假期的调休预测。
             hld_startdate, hld_enddate, lieu_1, lieu_2 = \
-            CalculationUtil.spring_festival(year)
+                CalculationUtil.spring_festival(year)
         elif holiday_type == HolidayType.QM:  # 该部分用于处理清明假期的调休预测。
             hld_startdate, hld_enddate, lieu_1 = \
-            CalculationUtil.qing_ming(year)
+                CalculationUtil.qing_ming(year)
         elif holiday_type == HolidayType.DW:  # 该部分用于处理端午假期的调休预测。
             hld_startdate, hld_enddate, lieu_1 = \
-            CalculationUtil.duan_wu(year)
+                CalculationUtil.duan_wu(year)
         elif holiday_type == HolidayType.ILD:  # 该部分用于处理五一假期的调休预测。
             international_labours_day_result: Optional[Tuple[
                 datetime.datetime, datetime.datetime, datetime.datetime,
@@ -67,46 +68,47 @@ def calculation(years: str, holiday_type: HolidayType,
                 return ("错误的输入。给定年份 {year} "
                         "不存在五一假期。".format(year=year))
             hld_startdate, hld_enddate, lieu_1, lieu_2 = \
-            international_labours_day_result
+                international_labours_day_result
         elif holiday_type == HolidayType.MA:  # 该部分用于处理中秋假期的调休预测。
             hld_startdate, hld_enddate, lieu_1, lieu_2 = \
-            CalculationUtil.mid_autumn(year)
+                CalculationUtil.mid_autumn(year)
     except Exception as e:
         return "程序未按预期进行。抛出了异常:\n{error!r}".format(error=e)
-    hld_days: int = (hld_enddate-hld_startdate).days + 1 # type: ignore
+    hld_days: int = (hld_enddate - hld_startdate).days + 1  # type: ignore
     if only_return_days:
-        return str(hld_days) # type: ignore
+        return str(hld_days)  # type: ignore
     if lieu_1 is not None and lieu_2 is not None:
         return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
                 "调休时间为 {lieu1}（星期{lieu1_dateofweek}）和 {lieu2}（星期{lieu2_dateofweek}）。".format(
-                   start=hld_startdate,
-                   start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()], # type: ignore
-                   end=hld_enddate, 
-                   end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()], # type: ignore
-                   lieu1=lieu_1.date(),
-                   lieu1_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
-                   lieu2=lieu_2.date(),
-                   lieu2_dateofweek=Data.INT_TO_WEEKDAY[lieu_2.weekday()],
-                   day=hld_days # type: ignore
-               ))
+            start=hld_startdate,
+            start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+            end=hld_enddate,
+            end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+            lieu1=lieu_1.date(),
+            lieu1_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
+            lieu2=lieu_2.date(),
+            lieu2_dateofweek=Data.INT_TO_WEEKDAY[lieu_2.weekday()],
+            day=hld_days  # type: ignore
+        ))
     if lieu_1 is not None:
         return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
                 "调休时间为 {lieu}（星期{lieu_dateofweek}）。".format(
-                   start=hld_startdate,
-                   start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()], # type: ignore
-                   end=hld_enddate, 
-                   end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()], # type: ignore
-                   lieu=lieu_1.date(),
-                   lieu_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
-                   day=hld_days # type: ignore
-               ))
+            start=hld_startdate,
+            start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+            end=hld_enddate,
+            end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+            lieu=lieu_1.date(),
+            lieu_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
+            day=hld_days  # type: ignore
+        ))
     return "假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。".format(
         start=hld_startdate,
-        start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()], # type: ignore
-        end=hld_enddate, 
-        end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()], # type: ignore
-        day=hld_days # type: ignore
+        start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+        end=hld_enddate,
+        end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+        day=hld_days  # type: ignore
     )
+
 
 root: tk.Tk = tk.Tk()
 root.title("Holiday Predictor / 假期预测器")
