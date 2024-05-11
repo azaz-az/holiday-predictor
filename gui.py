@@ -24,8 +24,8 @@ from typing import Optional, Tuple
 import datetime
 import tkinter as tk
 
-from data import Data, HolidayType
-from main import CalculationUtil
+from text_info import TextInfo, HolidayType
+from holiday_predictor import CalculationUtil
 
 
 def calculation(years: str, holiday_type: HolidayType,
@@ -85,31 +85,31 @@ def calculation(years: str, holiday_type: HolidayType,
         return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
                 "调休时间为 {lieu1}（星期{lieu1_dateofweek}）和 {lieu2}（星期{lieu2_dateofweek}）。".format(
             start=hld_startdate,
-            start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+            start_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
             end=hld_enddate,
-            end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+            end_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
             lieu1=lieu_1.date(),
-            lieu1_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
+            lieu1_dateofweek=TextInfo.INT_TO_WEEKDAY[lieu_1.weekday()],
             lieu2=lieu_2.date(),
-            lieu2_dateofweek=Data.INT_TO_WEEKDAY[lieu_2.weekday()],
+            lieu2_dateofweek=TextInfo.INT_TO_WEEKDAY[lieu_2.weekday()],
             day=hld_days  # type: ignore
         ))
     if lieu_1 is not None:
         return ("假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。"
                 "调休时间为 {lieu}（星期{lieu_dateofweek}）。".format(
             start=hld_startdate,
-            start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+            start_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
             end=hld_enddate,
-            end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+            end_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
             lieu=lieu_1.date(),
-            lieu_dateofweek=Data.INT_TO_WEEKDAY[lieu_1.weekday()],
+            lieu_dateofweek=TextInfo.INT_TO_WEEKDAY[lieu_1.weekday()],
             day=hld_days  # type: ignore
         ))
     return "假期由 {start}（星期{start_dateofweek}）起，直到 {end}（星期{end_dateofweek}），共 {day} 天。".format(
         start=hld_startdate,
-        start_dateofweek=Data.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
+        start_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_startdate.weekday()],  # type: ignore
         end=hld_enddate,
-        end_dateofweek=Data.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
+        end_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_enddate.weekday()],  # type: ignore
         day=hld_days  # type: ignore
     )
 
@@ -177,10 +177,10 @@ if __name__ == "__main__":
         )
     ).grid(row=8, column=0)
     fc_result_label.grid(row=10, column=0, columnspan=2)
-    tk.Label(root, text=Data.international_labours_day_note).grid(
+    tk.Label(root, text=TextInfo.international_labours_day_note).grid(
         row=0, column=1, rowspan=5
     )
-    tk.Label(root, text=Data.spring_festival_note).grid(
+    tk.Label(root, text=TextInfo.spring_festival_note).grid(
         row=5, column=1, rowspan=5
     )
     root.mainloop()
