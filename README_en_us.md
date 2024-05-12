@@ -32,7 +32,7 @@ This gadget can predict the subsequent Chinese National Day, New Year's Day, the
 This Repo Open Sources on GitHub，And also publish on PyPI.
 
 [![Click To GitHub Repo](https://img.shields.io/badge/click_to-github_repo-%2300fffd?style=for-the-badge)](https://github.com/azaz-az/holiday-predictor)
-[![Click To PyPI](https://img.shields.io/badge/click_to-pypi-%23fdda50?style=for-the-badge)](https://pypi.org/project/holiday_predictor/)
+[![Click To PyPI](https://img.shields.io/badge/click_to-pypi-%23fdda50?style=for-the-badge)](https://pypi.org/project/holiday-predictor/)
 
 Contributors List:
 
@@ -44,8 +44,13 @@ Contributors List:
 > This module's installations：
 > 
 > ```
-> pip install holiday_predictor
+> pip install holiday-predictor
 > ```
+> Use this module in your project: you can use
+> ```
+> import holiday_predictor
+> ```
+> to import this module.
 
 
 This project uses the [zhdate](https://github.com/CutePandaSh/zhdate) module. It is open source under GPL 3.0.

@@ -32,7 +32,7 @@
 本仓库在 GitHub 上开源，同时在 PyPI 上发布。
 
 [![Click To GitHub Repo](https://img.shields.io/badge/click_to-github_repo-%2300fffd?style=for-the-badge)](https://github.com/azaz-az/holiday-predictor)
-[![Click To PyPI](https://img.shields.io/badge/click_to-pypi-%23fdda50?style=for-the-badge)](https://pypi.org/project/holiday_predictor/)
+[![Click To PyPI](https://img.shields.io/badge/click_to-pypi-%23fdda50?style=for-the-badge)](https://pypi.org/project/holiday-predictor/)
 
 贡献者名单：
 
@@ -44,8 +44,13 @@
 > 模块安装方式：
 > 
 > ```
-> pip install holiday_predictor
+> pip install holiday-predictor
 > ```
+> 在您的项目中使用：您可以在您的项目中使用
+> ```
+> import holiday_predictor
+> ```
+> 来导入本模块。
 
 本项目使用了[zhdate](https://github.com/CutePandaSh/zhdate)模块。使用GPL3.0协议开放源代码。
 
