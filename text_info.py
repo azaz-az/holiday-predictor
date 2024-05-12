@@ -1,4 +1,4 @@
-"""存储一些程序所需信息的模块。
+"""存储一些 Demo 程序所需信息的模块。
 
 该模块存储了部分程序运行时所需要的信息。
 """
@@ -6,58 +6,12 @@
 from enum import Enum
 from typing import ClassVar, Dict, Optional, Tuple
 
-class Data:
-    """存储一些程序所需信息的类。
+
+class TextInfo:
+    """存储一些程序所需文本信息的类。
 
     该类存储了部分程序运行时需要的信息。
     """
-
-    # 以下这四行存储的是所有3天假期的放假安排，这些数据代表与节日当天差的天数
-    HLD_3DAYS_DAYS: ClassVar[Tuple[int, int, int, int, int, int, int]] = \
-    (3, 3, 1, 3, 3, 3, 3)
-    HLD_3DAYS_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (-2, -2,  0,  0,  0,  0, -1)
-    HLD_3DAYS_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (0, 0, 0, 2, 2, 2, 1)
-    HLD_3DAYS_LIEU1_DELTA_DAY: ClassVar[Tuple[
-        Optional[int], Optional[int], Optional[int], Optional[int],
-        Optional[int], Optional[int], Optional[int]
-    ]] = (None, -3, None, 3, None, None, None)
-
-    # 以下这五行存储的是五一假期的放假安排，这些数据代表与节日当天差的天数
-    INTERNATIONAL_LABOURS_DAY_DAYS: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (5, 5, 5, 5, 5, 5, 5)
-    INTERNATIONAL_LABOURS_DAY_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (-2, -3, 0, 0, 0, 0, -1)
-    INTERNATIONAL_LABOURS_DAY_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (2, 1, 4, 4, 4, 4, 3)
-    INTERNATIONAL_LABOURS_DAY_LIEU1_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (-8, -9, -3, -4, -5, -6, -7)
-    INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (5, 4, 10, 9, 8, 7, 6)
-
-    # 以下这五行存储的是春节假期的放假安排，这些数据代表与节日当天差的天数
-    SPRING_FESTIVAL_DAYS: ClassVar[Tuple[int, int, int, int, int, int, int]] =\
-    (8, 8, 8, 8, 8, 8, 8)
-    SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (-2, 0, 0, 0, 0, 0, -1)
-    SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (5, 7, 7, 7, 7, 7, 6)
-    SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (-8, -2, -3, -4, 8, -6, -7)
-    SPRING_FESTIVAL_LIEU2_DELTA_DAY: ClassVar[Tuple[
-        int, int, int, int, int, int, int
-    ]] = (6, 11, 10, 9, 9, 8, 7)
 
     INT_TO_WEEKDAY: ClassVar[Tuple[
         str, str, str, str, str, str, str
@@ -116,18 +70,22 @@ class Data:
       因此，在预测以前的春节假期时，本程序给出的结果并不准确。
       并且，由于在本项目制作春节部分时是第一个除夕不放假，连放8天的春节，没有过往的历史可以参考，
       在预测未来的春节假期时，也不一定准确。"""
-    
-    international_labours_day_note_en_us: ClassVar[str] = """ Note: The International Labour's Day holiday in China has gone through two modifications.
-      At the earliest, International Labour's Day was a seven-day holiday; later, International Labour's Day was a three-day holiday; and now, International Labour's Day is a five-day holiday.
-      In this procedure, the five-day holiday is applied in each case.
-      Therefore, when predicting past International Labor Day holidays, the program gives inaccurate results. \n"""
 
-    spring_festival_note_en_us: ClassVar[str] = """ Note: China's Spring Festival holiday has undergone two revisions.
-      At the earliest, there was no holiday on New Year's Eve and the holiday lasted a total of seven days; later, there was a holiday on New Year's Eve and the holiday lasted a total of seven days; to this day, there is no holiday on New Year's Eve and the holiday lasts a total of eight days.
-      In this process, the expression no holiday on New Year's Eve and eight days of holiday was uniformly used.
-      Therefore, when predicting past Chinese New Year holidays, the program gave inaccurate results.
-      In addition, the program did not have past history to refer to when producing the Chinese New Year segment, as it was the first Chinese New Year in which there was no holiday on New Year's Eve and eight consecutive days of holiday.
-      Predicting future Chinese New Year holidays may not be accurate. """
+    international_labours_day_note_en_us: ClassVar[str] = """Note: The International Labour's Day holiday in China 
+    has gone through two modifications. At the earliest, International Labour's Day was a seven-day holiday; later, 
+    International Labour's Day was a three-day holiday; and now, International Labour's Day is a five-day holiday. In 
+    this procedure, the five-day holiday is applied in each case. Therefore, when predicting past International Labor 
+    Day holidays, the program gives inaccurate results. \n"""
+
+    spring_festival_note_en_us: ClassVar[str] = """Note: China's Spring Festival holiday has undergone two revisions. 
+    At the earliest, there was no holiday on New Year's Eve and the holiday lasted a total of seven days; later, 
+    there was a holiday on New Year's Eve and the holiday lasted a total of seven days; to this day, there is no 
+    holiday on New Year's Eve and the holiday lasts a total of eight days. In this process, the expression no holiday 
+    on New Year's Eve and eight days of holiday was uniformly used. Therefore, when predicting past Chinese New Year 
+    holidays, the program gave inaccurate results. In addition, the program did not have past history to refer to 
+    when producing the Chinese New Year segment, as it was the first Chinese New Year in which there was no holiday 
+    on New Year's Eve and eight consecutive days of holiday. Predicting future Chinese New Year holidays may not be 
+    accurate."""
 
     international_labours_day_note_i18n: ClassVar[Dict[str, str]] = {
         "zh_hans": international_labours_day_note,
@@ -138,6 +96,7 @@ class Data:
         "zh_hans": spring_festival_note,
         "en_us": spring_festival_note_en_us
     }
+
 
 class HolidayType(Enum):
     NATIONAL_DAY = "-nd"
