@@ -34,8 +34,12 @@ from .data import Data
 
 class CalculationUtil:
     """计算假期安排所需的类。
-    用法：CalculationUtil.假期名(年份)
-    输出：<假期开始日期>, <假期结束日期>, [调休日期1(若有)], [调休日期2(若有)]
+
+    Args：
+        CalculationUtil.假期名(年份)
+
+    Returns：
+        datetime: <假期开始日期>, datetime: <假期结束日期>, datetime: [调休日期1(若有)], datetime: [调休日期2(若有)]
     """
 
     @staticmethod
