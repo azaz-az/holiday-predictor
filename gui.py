@@ -1,7 +1,7 @@
 #!python3
 
-"""这是一个本项目的 GUI.
-请不要尝试将其作为模块导入"""
+"""这是一个本项目的 GUI Demo 程序。
+"""
 
 """
 Holiday Predictor / 假期预测器 - 基于 Python 的调休预测工具。
