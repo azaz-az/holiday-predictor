@@ -24,6 +24,7 @@ class TextInfo:
         "\n"
         "指令 (command)：\n"
         "    forecast 或 fc ---------------- 预测对应年份的假期情况。\n"
+        "    forecast_list 或 fcls --------- 预测对应年份的假期情况。\n"
         "    quit 或 exit ------------------ 退出程序。\n"
         "\n"
         "参数 (argument)：\n"
@@ -53,8 +54,15 @@ class TextInfo:
         "    fc 2061 -ma --only-return-days ---- 预测 2061 年的中秋假期，且只输出假期天数。\n"
         "    fc 2047 -ild --do-not-output-notes - 预测 2061 年的五一假期，且不输出 Note 信息。\n"
         "\n"
-        "注意：\n"
-        "    由于部分兼容性问题，forecastlist 或 fclist 指令已从 Holiday Predictor / 假期预测器 中移除。\n"
+        "对于 forecast_list 或 fcls 命令，用法如下：\n"
+        "   [command] [start-year] [end-year] [argument]\n"
+        "   argument 部分，与 forecast 命令的 argument 相同。"
+        "\n"
+        "示例：\n"
+        "   forecast_list 2024 2029 -national-day"
+        "   （该示例与 fcls 2024 2029 -nd 等效。）\n"
+        "注意：forecast_list 功能在 v0.4.0 中被移除，并在 v0.12.0 中重新加入。"
+        "如果你正在使用 v0.4.0 ~ v0.11.x 的版本，则无法使用 forecast_list 功能"
     )
 
     help_i18n: ClassVar[Dict[str, str]] = {"zh_hans": help}
