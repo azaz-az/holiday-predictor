@@ -56,13 +56,14 @@ class TextInfo:
         "\n"
         "对于 forecast_list 或 fcls 命令，用法如下：\n"
         "   [command] [start-year] [end-year] [argument]\n"
-        "   argument 部分，与 forecast 命令的 argument 相同。"
+        "   argument 部分，与 forecast 命令的 argument 相同。\n"
         "\n"
         "示例：\n"
-        "   forecast_list 2024 2029 -national-day"
+        "   forecast_list 2024 2029 -national-day\n"
         "   （该示例与 fcls 2024 2029 -nd 等效。）\n"
-        "注意：forecast_list 功能在 v0.4.0 中被移除，并在 v0.12.0 中重新加入。"
-        "如果你正在使用 v0.4.0 ~ v0.11.x 的版本，则无法使用 forecast_list 功能"
+        "注意：\n"
+        "   forecast_list 功能在 v0.4.0 中被移除，并在 v0.12.0 中重新加入。\n"
+        "   如果你正在使用 v0.4.0 ~ v0.11.x 的版本，则无法使用 forecast_list 功能\n"
     )
 
     help_i18n: ClassVar[Dict[str, str]] = {"zh_hans": help}
