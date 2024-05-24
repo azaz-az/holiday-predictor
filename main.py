@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-__all__ = ["calculation"]
+__all__ = ["calculation", "calculation_forecast_list"]
 
 import sys
 
@@ -25,9 +25,41 @@ import datetime
 
 from zhdate import ZhDate  # type: ignore
 
-from holiday_predictor import CalculationUtil
+from holiday_predictor import CalculationUtil, ForecastList
 
 from text_info import TextInfo
+
+
+def calculation_forecast_list(given_list: List[str]) -> str:
+    """该函数用于计算 forecast list 形式的多个假期日期和调休日期。
+
+    该函数计算指定的年份范围 中，用户输入的假期的年份范围和这些假期的调休情况。
+
+    Args:
+        given_list (list[str]): 传入用户的输入，这是以用空格拆分后的列表形式输入的。
+
+    Returns:
+        str: 返回需要打印的输出字符串。
+    """
+
+    start_year: int = int(given_list[1])
+    end_year: int = int(given_list[2])
+    holiday_name: str = str(given_list[3])
+
+    if holiday_name in ("--national-day", "-nd"):
+        return ForecastList.national_day(start_year, end_year)
+    if holiday_name in ("--new-year", "-ny"):
+        return ForecastList.new_year(start_year, end_year)
+    if holiday_name in ("--spring-festival", "-sf"):
+        return ForecastList.spring_festival(start_year, end_year)
+    if holiday_name in ("--qing-ming", "-qm"):
+        return ForecastList.new_year(start_year, end_year)
+    if holiday_name in ("--international-labours-day", "-ild"):
+        return ForecastList.international_labours_day(start_year, end_year)
+    if holiday_name in ("--duan-wu", "-dw"):
+        return ForecastList.duan_wu(start_year, end_year)
+    if holiday_name in ("--mid-autumn", "-ma"):
+        return ForecastList.mid_autumn(start_year, end_year)
 
 
 def calculation(given_list: List[str]) -> str:
