@@ -23,9 +23,71 @@ from typing import Optional, Tuple, List
 
 from zhdate import ZhDate  # type: ignore
 
-from holiday_predictor import CalculationUtil, ForecastList
+from holiday_predictor import CalculationUtil
 from text_info import TextInfo
 
+class ForecastList:
+    """处理 ForecastList 请求的类.
+
+    Args:
+        ForecastList.假期名(起始年份: int, 结束年份: int)
+
+    Returns:
+        范围内的所有指定假期的放假、调休日期: List
+
+        列表每一项的详细格式见下:
+
+        <假期开始日期>: datetime, <假期结束日期>: datetime, [调休日期1(若有)]: datetime, [调休日期2(若有)]: datetime
+    """
+
+    @staticmethod
+    def new_year(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-ny"]))
+        return results
+
+    @staticmethod
+    def spring_festival(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-sf"]))
+        return results
+
+    @staticmethod
+    def qing_ming(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-qm"]))
+        return results
+
+    @staticmethod
+    def international_labours_day(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-ild"]))
+        return results
+
+    @staticmethod
+    def duan_wu(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-dw"]))
+        return results
+
+    @staticmethod
+    def mid_autumn(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-ma"]))
+        return results
+
+    @staticmethod
+    def national_day(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(calculation(["fc", start_year + i, "-nd"]))
+        return results
 
 def calculation_forecast_list(given_list: List[str]) -> str:
     """该函数用于计算 forecast list 形式的多个假期日期和调休日期。
@@ -44,19 +106,19 @@ def calculation_forecast_list(given_list: List[str]) -> str:
     holiday_name: str = str(given_list[3])
 
     if holiday_name in ("--national-day", "-nd"):
-        return ForecastList.national_day(start_year, end_year)
+        return '\n'.join(ForecastList.national_day(start_year, end_year))
     if holiday_name in ("--new-year", "-ny"):
-        return ForecastList.new_year(start_year, end_year)
+        return '\n'.join(ForecastList.new_year(start_year, end_year))
     if holiday_name in ("--spring-festival", "-sf"):
-        return ForecastList.spring_festival(start_year, end_year)
+        return '\n'.join(ForecastList.spring_festival(start_year, end_year))
     if holiday_name in ("--qing-ming", "-qm"):
-        return ForecastList.new_year(start_year, end_year)
+        return '\n'.join(ForecastList.new_year(start_year, end_year))
     if holiday_name in ("--international-labours-day", "-ild"):
-        return ForecastList.international_labours_day(start_year, end_year)
+        return '\n'.join(ForecastList.international_labours_day(start_year, end_year))
     if holiday_name in ("--duan-wu", "-dw"):
-        return ForecastList.duan_wu(start_year, end_year)
+        return '\n'.join(ForecastList.duan_wu(start_year, end_year))
     if holiday_name in ("--mid-autumn", "-ma"):
-        return ForecastList.mid_autumn(start_year, end_year)
+        return '\n'.join(ForecastList.mid_autumn(start_year, end_year))
 
 
 def calculation(given_list: List[str]) -> str:
