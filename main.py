@@ -17,16 +17,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 __all__ = ["calculation", "calculation_forecast_list"]
 
-import sys
-
-from typing import Optional, Tuple, List, ClassVar
-
 import datetime
+
+from typing import Optional, Tuple, List
 
 from zhdate import ZhDate  # type: ignore
 
 from holiday_predictor import CalculationUtil, ForecastList
-
 from text_info import TextInfo
 
 
