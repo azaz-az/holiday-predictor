@@ -281,3 +281,67 @@ class CalculationUtil:
             ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[mid_autumn_dateofweek] is not None \
                 else None  # type: ignore
         return hld_startdate, hld_enddate, lieu_1, None
+
+
+class ForecastList:
+    """处理 ForecastList 请求的类.
+
+    Args:
+        ForecastList.假期名(起始年份: int, 结束年份: int)
+
+    Returns:
+        范围内的所有指定假期的放假、调休日期: List
+
+        列表每一项的详细格式见下:
+
+        <假期开始日期>: datetime, <假期结束日期>: datetime, [调休日期1(若有)]: datetime, [调休日期2(若有)]: datetime
+    """
+
+    @staticmethod
+    def new_year(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.new_year(start_year + i))
+        return results
+
+    @staticmethod
+    def spring_festival(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.spring_festival(start_year + i))
+        return results
+
+    @staticmethod
+    def qing_ming(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.qing_ming(start_year + i))
+        return results
+
+    @staticmethod
+    def international_labours_day(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.international_labours_day(start_year + i))
+        return results
+
+    @staticmethod
+    def duan_wu(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.duan_wu(start_year + i))
+        return results
+
+    @staticmethod
+    def mid_autumn(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.mid_autumn(start_year + i))
+        return results
+
+    @staticmethod
+    def national_day(start_year: int, end_year: int):
+        results: list = []
+        for i in range(end_year - start_year + 1):
+            results.append(CalculationUtil.national_day(start_year + i))
+        return results
