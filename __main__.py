@@ -87,6 +87,10 @@ if __name__ == "__main__" and len(sys.argv) < 2:
 elif __name__ == "__main__" and len(sys.argv) > 1:
     input_list = sys.argv[1:]
 
+    if input_list[0] in ("forecast_list", "fcls"):  # 处理用户发起的 forecast_list 指令请求。
+        print(calculation_forecast_list(input_list))
+        sys.exit(0)
+
     if input_list[0] in ("forecast", "fc"):  # 处理用户发起的 forecast 指令请求。
         try:
             print(calculation(input_list))
