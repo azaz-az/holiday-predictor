@@ -46,7 +46,22 @@ if __name__ == "__main__" and len(sys.argv) < 2:
             break
 
         if input_list[0] in ("forecast_list", "fcls"):  # 处理用户发起的 forecast_list 指令请求。
-            print(calculation_forecast_list(input_list))
+            try:
+                print(calculation_forecast_list(input_list))
+            except (KeyboardInterrupt, EOFError):
+                print("\nHoliday Predictor / 假期预测器 已结束运行。感谢你的使用。")
+                break
+            except Exception as e:
+                if len(input_list) <= 2:
+                    print("可能缺少了指令、年份 和/或 参数。")
+                elif (input_list[2])[0] == "-" and (input_list[2])[1] != "-":
+                    print(f'输入的参数有误。你想输入 "-{input_list[2]}" 吗？')
+                else:
+                    print("程序无法定位错误的原因。可能是参数输入错误，也有可能是程序运行错误。")
+                print("抛出了异常 {error!r}。".format(error=e))
+                print('\n如果你不会使用该程序，键入 "help" 以查看帮助。')
+                print("如果无法定位程序未按预期运行的原因，请向我们报告错误。"
+                      "https://github.com/azaz-az/holiday-predictor\n")
             execution_flag = True
 
         if input_list[0] in ("forecast", "fc"):  # 处理用户发起的 forecast 指令请求。
@@ -88,8 +103,23 @@ elif __name__ == "__main__" and len(sys.argv) > 1:
     input_list = sys.argv[1:]
 
     if input_list[0] in ("forecast_list", "fcls"):  # 处理用户发起的 forecast_list 指令请求。
-        print(calculation_forecast_list(input_list))
-        sys.exit(0)
+        try:
+            print(calculation_forecast_list(input_list))
+            sys.exit(0)
+        except Exception as e:
+            print("程序未按预期进行。\n\n可能的原因：")
+            if len(input_list) <= 2:
+                print("可能缺少了指令、年份 和/或 参数。")
+            elif (input_list[2])[0] == "-" and (input_list[2])[1] != "-":
+                print(f'输入的参数有误。你想输入 "-{input_list[2]}" 吗？')
+            else:
+                print("程序无法定位错误的原因。可能是参数输入错误，也有可能是程序运行错误。")
+            print("抛出了异常 {error!r}。".format(error=e))
+            print('\n如果你不会使用该程序，键入 '
+                  '"{arg0} help" 以查看帮助。'.format(arg0=sys.argv[0]))
+            print("如果无法定位程序未按预期运行的原因，请向我们报告错误。"
+                  "https://github.com/azaz-az/holiday-predictor\n")
+            sys.exit(2)
 
     if input_list[0] in ("forecast", "fc"):  # 处理用户发起的 forecast 指令请求。
         try:
