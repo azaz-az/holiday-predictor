@@ -51,3 +51,14 @@ class Data:
     SPRING_FESTIVAL_LIEU2_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
     ]] = (6, 11, 10, 9, 9, 8, 7)
+
+    class NearlyNext:
+        """这个子类存储的是与 CalculationUtil.NearlyNext 有关的信息。"""
+
+        HOLIDAY_MAPPING_TABLE: ClassVar[Tuple[
+            str, str, str, str, str, str, str, str, str, str, str, str, str, str,
+        ]] = ('new_year', 'new_year', 'spring_festival', 'spring_festival',
+              'qing_ming', 'qing_ming', 'international_labours_day', 'international_labours_day',
+              'duan_wu', 'duan_wu', 'mid_autumn', 'mid_autumn',
+              'national_day', 'national_day',)
+
