@@ -40,6 +40,9 @@ class CalculationUtil:
 
     Returns：
         datetime: <假期开始日期>, datetime: <假期结束日期>, datetime: [调休日期1(若有)], datetime: [调休日期2(若有)]
+
+    Tip:
+        本类的子类 "NearlyNext" 可以预测离某天最近的下一个假期
     """
 
     @staticmethod
@@ -281,3 +284,57 @@ class CalculationUtil:
             ) if Data.HLD_3DAYS_LIEU1_DELTA_DAY[mid_autumn_dateofweek] is not None \
                 else None  # type: ignore
         return hld_startdate, hld_enddate, lieu_1, None
+
+    class NearlyNext:
+        """预测离某天最近的下一个假期的类。"""
+
+        @staticmethod
+        def today():
+            forecast_date: datetime.datetime = datetime.datetime.today()
+            new_year_date: tuple = CalculationUtil.new_year(forecast_date.year)
+            spring_festival_date: tuple = CalculationUtil.spring_festival(forecast_date.year)
+            qing_ming_date: tuple = CalculationUtil.qing_ming(forecast_date.year)
+            duan_wu_date: tuple = CalculationUtil.duan_wu(forecast_date.year)
+            international_labours_day: tuple = CalculationUtil.international_labours_day(forecast_date.year)
+            mid_autumn_date: tuple = CalculationUtil.mid_autumn(forecast_date.year)
+            national_day_date: tuple = CalculationUtil.national_day(forecast_date.year)
+
+            holiday_list: list = [
+                datetime.timedelta(days=0) - (forecast_date - new_year_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - new_year_date[1]),
+                datetime.timedelta(days=0) - (forecast_date - spring_festival_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - spring_festival_date[1]),
+                datetime.timedelta(days=0) - (forecast_date - qing_ming_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - qing_ming_date[1]),
+                datetime.timedelta(days=0) - (forecast_date - international_labours_day[0]),
+                datetime.timedelta(days=0) - (forecast_date - international_labours_day[1]),
+                datetime.timedelta(days=0) - (forecast_date - duan_wu_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - duan_wu_date[1]),
+                datetime.timedelta(days=0) - (forecast_date - mid_autumn_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - mid_autumn_date[1]),
+                datetime.timedelta(days=0) - (forecast_date - national_day_date[0]),
+                datetime.timedelta(days=0) - (forecast_date - national_day_date[1]),
+            ]
+
+            for i in range(len(holiday_list)):
+                if holiday_list[i] < datetime.timedelta(days=0):
+                    holiday_list[i] = datetime.timedelta(days=9999)
+
+            nearly_holiday_time_difference: datetime.timedelta = min(holiday_list)
+            holiday_name: str = Data.NearlyNext.HOLIDAY_MAPPING_TABLE[
+                holiday_list.index(nearly_holiday_time_difference)]
+
+            if holiday_name == 'new_year':
+                return CalculationUtil.new_year(forecast_date.year)
+            elif holiday_name == 'spring_festival':
+                return CalculationUtil.spring_festival(forecast_date.year)
+            elif holiday_name == 'qing_ming':
+                return CalculationUtil.qing_ming(forecast_date.year)
+            elif holiday_name == 'international_labours_day':
+                return CalculationUtil.international_labours_day(forecast_date.year)
+            elif holiday_name == 'duan_wu':
+                return CalculationUtil.duan_wu(forecast_date.year)
+            elif holiday_name == 'mid_autumn':
+                return CalculationUtil.mid_autumn(forecast_date.year)
+            else:
+                return None
