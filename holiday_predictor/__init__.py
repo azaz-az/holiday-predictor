@@ -325,16 +325,16 @@ class CalculationUtil:
                 holiday_list.index(nearly_holiday_time_difference)]
 
             if holiday_name == 'new_year':
-                return CalculationUtil.new_year(forecast_date.year)
+                return CalculationUtil.new_year(forecast_date.year), 'new_year'
             elif holiday_name == 'spring_festival':
-                return CalculationUtil.spring_festival(forecast_date.year)
+                return CalculationUtil.spring_festival(forecast_date.year), 'spring_festival'
             elif holiday_name == 'qing_ming':
-                return CalculationUtil.qing_ming(forecast_date.year)
+                return CalculationUtil.qing_ming(forecast_date.year), 'qing_ming'
             elif holiday_name == 'international_labours_day':
-                return CalculationUtil.international_labours_day(forecast_date.year)
+                return CalculationUtil.international_labours_day(forecast_date.year), 'international_labours_day'
             elif holiday_name == 'duan_wu':
-                return CalculationUtil.duan_wu(forecast_date.year)
+                return CalculationUtil.duan_wu(forecast_date.year), 'duan_wu'
             elif holiday_name == 'mid_autumn':
-                return CalculationUtil.mid_autumn(forecast_date.year)
+                return CalculationUtil.mid_autumn(forecast_date.year), 'mid_autumn'
             else:
                 return None
