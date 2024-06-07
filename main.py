@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-__all__ = ["calculation", "calculation_forecast_list"]
+__all__ = ["calculation", "calculation_forecast_list", "calculation_forecast_nearly"]
 
 import datetime
 
@@ -25,6 +25,7 @@ from zhdate import ZhDate  # type: ignore
 
 from holiday_predictor import CalculationUtil
 from text_info import TextInfo
+
 
 class ForecastList:
     """处理 ForecastList 请求的类.
@@ -88,6 +89,7 @@ class ForecastList:
         for i in range(end_year - start_year + 1):
             results.append(calculation(["fc", start_year + i, "-nd"]))
         return results
+
 
 def calculation_forecast_list(given_list: List[str]) -> str:
     """该函数用于计算 forecast list 形式的多个假期日期和调休日期。
@@ -217,3 +219,13 @@ def calculation(given_list: List[str]) -> str:
         end_dateofweek=TextInfo.INT_TO_WEEKDAY[hld_enddate.weekday()],
         day=hld_days
     )
+
+
+def calculation_forecast_nearly() -> str:
+    return (calculation(['forecast',
+                         datetime.datetime.today().year,
+                         '--' + str(CalculationUtil.NearlyNext.today()[1].replace('_', '-'))]))
+
+
+if __name__ == "__main__":
+    print(calculation_forecast_nearly())
