@@ -287,54 +287,34 @@ class CalculationUtil:
 
     class NearlyNext:
         """预测离某天最近的下一个假期的类。"""
+        # 以下这个字典存储的是节日的名称与其对应的函数，方便后续添加其他自定义节日。
 
         @staticmethod
         def today():
-            forecast_date: datetime.datetime = datetime.datetime.today()
-            new_year_date: tuple = CalculationUtil.new_year(forecast_date.year)
-            spring_festival_date: tuple = CalculationUtil.spring_festival(forecast_date.year)
-            qing_ming_date: tuple = CalculationUtil.qing_ming(forecast_date.year)
-            duan_wu_date: tuple = CalculationUtil.duan_wu(forecast_date.year)
-            international_labours_day: tuple = CalculationUtil.international_labours_day(forecast_date.year)
-            mid_autumn_date: tuple = CalculationUtil.mid_autumn(forecast_date.year)
-            national_day_date: tuple = CalculationUtil.national_day(forecast_date.year)
-
-            holiday_list: list = [
-                datetime.timedelta(days=0) - (forecast_date - new_year_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - new_year_date[1]),
-                datetime.timedelta(days=0) - (forecast_date - spring_festival_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - spring_festival_date[1]),
-                datetime.timedelta(days=0) - (forecast_date - qing_ming_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - qing_ming_date[1]),
-                datetime.timedelta(days=0) - (forecast_date - international_labours_day[0]),
-                datetime.timedelta(days=0) - (forecast_date - international_labours_day[1]),
-                datetime.timedelta(days=0) - (forecast_date - duan_wu_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - duan_wu_date[1]),
-                datetime.timedelta(days=0) - (forecast_date - mid_autumn_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - mid_autumn_date[1]),
-                datetime.timedelta(days=0) - (forecast_date - national_day_date[0]),
-                datetime.timedelta(days=0) - (forecast_date - national_day_date[1]),
-            ]
-
-            for i in range(len(holiday_list)):
-                if holiday_list[i] < datetime.timedelta(days=0):
-                    holiday_list[i] = datetime.timedelta(days=9999)
-
-            nearly_holiday_time_difference: datetime.timedelta = min(holiday_list)
-            holiday_name: str = Data.NearlyNext.HOLIDAY_MAPPING_TABLE[
-                holiday_list.index(nearly_holiday_time_difference)]
-
-            if holiday_name == 'new_year':
-                return CalculationUtil.new_year(forecast_date.year), 'new_year'
-            elif holiday_name == 'spring_festival':
-                return CalculationUtil.spring_festival(forecast_date.year), 'spring_festival'
-            elif holiday_name == 'qing_ming':
-                return CalculationUtil.qing_ming(forecast_date.year), 'qing_ming'
-            elif holiday_name == 'international_labours_day':
-                return CalculationUtil.international_labours_day(forecast_date.year), 'international_labours_day'
-            elif holiday_name == 'duan_wu':
-                return CalculationUtil.duan_wu(forecast_date.year), 'duan_wu'
-            elif holiday_name == 'mid_autumn':
-                return CalculationUtil.mid_autumn(forecast_date.year), 'mid_autumn'
-            else:
-                return None
+            forecast_date = datetime.datetime.today()
+            holidays = {
+                'new_year': CalculationUtil.new_year,
+                'spring_festival': CalculationUtil.spring_festival,
+                'qing_ming': CalculationUtil.qing_ming,
+                'duan_wu': CalculationUtil.duan_wu,
+                'international_labours_day': CalculationUtil.international_labours_day,
+                'mid_autumn': CalculationUtil.mid_autumn,
+                'national_day': CalculationUtil.national_day,
+            }
+            nearest_holiday = None
+            nearest_holiday = None
+            def process_holiday(item):
+                name, func = item
+                start_date, end_date, *_ = func(forecast_date.year)
+                return [(name, start_date, end_date, date - forecast_date) for date in (start_date, end_date)]
+            processed_dates = sum(map(process_holiday, holidays.items()), [])
+            nearest_holiday_data = min(
+                filter(lambda x: datetime.timedelta(days=0) <= x[3], processed_dates),
+                key=lambda x: x[3],
+                default=(None, None, None, None)
+            )
+            if nearest_holiday_data[0]:
+                nearest_holiday = nearest_holiday_data[:3]
+            if nearest_holiday:
+                return nearest_holiday[1:], nearest_holiday[0]
+            return None
