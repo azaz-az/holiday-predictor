@@ -84,7 +84,7 @@ if __name__ == "__main__" and len(sys.argv) < 2:
                       "https://github.com/azaz-az/holiday-predictor\n")
             execution_flag = True  # pylint: disable = C0103
 
-        if input_list[0] in ("fcnearly", "forecast-nearly"):
+        if input_list[0] in ("fcnearly", "forecast_nearly"):
             print(calculation_forecast_nearly())
             execution_flag = True
 
