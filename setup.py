@@ -4,7 +4,7 @@ with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 setuptools.setup(
     name="holiday_predictor",
-    version="0.13.0",
+    version="0.13.1",
     author="azaz-az",
     author_email="a233d@outlook.com",
     description="一个预测中国的假期安排的小工具",
