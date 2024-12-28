@@ -172,13 +172,12 @@ def calculation(given_list: List[str]) -> str:
         if '--do-not-output-notes' not in given_list:
             print(TextInfo.international_labours_day_note)
         international_labours_day_result: Optional[Tuple[
-            datetime.datetime, datetime.datetime, datetime.datetime,
-            datetime.datetime
+            datetime.datetime, datetime.datetime, datetime.datetime
         ]] = CalculationUtil.international_labours_day(forecast_year)
         if international_labours_day_result is None:
             return ("错误的输入。给定年份 {year} "
                     "不存在五一假期。".format(year=forecast_year))
-        hld_startdate, hld_enddate, lieu_1, lieu_2 = \
+        hld_startdate, hld_enddate, lieu_1 = \
             international_labours_day_result
     elif holiday_name in ("--mid-autumn", "-ma"):  # 该部分用于处理中秋假期的调休预测。
         hld_startdate, hld_enddate, lieu_1, lieu_2 = \

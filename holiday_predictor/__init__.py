@@ -215,8 +215,7 @@ class CalculationUtil:
 
     @staticmethod
     def international_labours_day(year: int) -> Optional[Tuple[
-        datetime.datetime, datetime.datetime, datetime.datetime,
-        datetime.datetime
+        datetime.datetime, datetime.datetime, datetime.datetime
     ]]:
         if year < 1890:
             return None
@@ -243,13 +242,13 @@ class CalculationUtil:
                     international_labours_day_dateofweek
                 ]
             )
-        lieu_2: datetime.datetime = \
+        '''lieu_2: datetime.datetime = \
             international_labours_day_date + datetime.timedelta(
                 Data.INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY[
                     international_labours_day_dateofweek
                 ]
-            )
-        return hld_startdate, hld_enddate, lieu_1, lieu_2
+            )'''
+        return hld_startdate, hld_enddate, lieu_1 #lieu_2
 
     @classmethod
     def mid_autumn(cls, year: int) -> Tuple[
