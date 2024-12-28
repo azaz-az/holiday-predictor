@@ -41,10 +41,10 @@ class Data:
         (8, 8, 8, 8, 8, 8, 8)
     SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
-    ]] = (-2, 0, 0, 0, 0, 0, -1)
+    ]] = (-2, -1, -1, -1, -1, -1, -1)
     SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
-    ]] = (5, 7, 7, 7, 7, 7, 6)
+    ]] = (4, 6, 6, 6, 6, 6, 5)
     SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
     ]] = (-8, -2, -3, -4, 8, -6, -7)
