@@ -221,9 +221,12 @@ def calculation(given_list: List[str]) -> str:
 
 
 def calculation_forecast_nearly() -> str:
-    return (calculation(['forecast',
-                         datetime.datetime.today().year,
-                         '--' + str(CalculationUtil.NearlyNext.today()[1].replace('_', '-'))]))
+    if CalculationUtil.NearlyNext.today() is None:
+        return calculation(['forecast', datetime.datetime.today().year + 1, '--new-year'])
+    else:
+        return (calculation(['forecast',
+                             datetime.datetime.today().year,
+                             '--' + str(CalculationUtil.NearlyNext.today()[1].replace('_', '-'))]))
 
 
 if __name__ == "__main__":

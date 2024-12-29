@@ -248,7 +248,7 @@ class CalculationUtil:
                     international_labours_day_dateofweek
                 ]
             )'''
-        return hld_startdate, hld_enddate, lieu_1 #lieu_2
+        return hld_startdate, hld_enddate, lieu_1  #lieu_2
 
     @classmethod
     def mid_autumn(cls, year: int) -> Tuple[
@@ -286,6 +286,7 @@ class CalculationUtil:
 
     class NearlyNext:
         """预测离某天最近的下一个假期的类。"""
+
         # 以下这个字典存储的是节日的名称与其对应的函数，方便后续添加其他自定义节日。
 
         @staticmethod
@@ -301,11 +302,12 @@ class CalculationUtil:
                 'national_day': CalculationUtil.national_day,
             }
             nearest_holiday = None
-            nearest_holiday = None
+
             def process_holiday(item):
                 name, func = item
                 start_date, end_date, *_ = func(forecast_date.year)
                 return [(name, start_date, end_date, date - forecast_date) for date in (start_date, end_date)]
+
             processed_dates = sum(map(process_holiday, holidays.items()), [])
             nearest_holiday_data = min(
                 filter(lambda x: datetime.timedelta(days=0) <= x[3], processed_dates),
