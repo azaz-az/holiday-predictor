@@ -71,7 +71,7 @@ def calculation(years: str, holiday_type: HolidayType,
             if international_labours_day_result is None:
                 return ("错误的输入。给定年份 {year} "
                         "不存在五一假期。".format(year=year))
-            hld_startdate, hld_enddate, lieu_1, lieu_2 = \
+            hld_startdate, hld_enddate, lieu_1 = \
                 international_labours_day_result
         elif holiday_type == HolidayType.MA:  # 该部分用于处理中秋假期的调休预测。
             hld_startdate, hld_enddate, lieu_1, lieu_2 = \

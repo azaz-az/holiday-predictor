@@ -32,19 +32,19 @@ class Data:
     INTERNATIONAL_LABOURS_DAY_LIEU1_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
     ]] = (-8, -9, -3, -4, -5, -6, -7)
-    INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY: ClassVar[Tuple[
+    '''INTERNATIONAL_LABOURS_DAY_LIEU2_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
-    ]] = (5, 4, 10, 9, 8, 7, 6)
+    ]] = (5, 4, 10, 9, 8, 7, 6)'''
 
     # 以下这五行存储的是春节假期的放假安排，这些数据代表与节日当天差的天数
     SPRING_FESTIVAL_DAYS: ClassVar[Tuple[int, int, int, int, int, int, int]] = \
         (8, 8, 8, 8, 8, 8, 8)
     SPRING_FESTIVAL_START_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
-    ]] = (-2, 0, 0, 0, 0, 0, -1)
+    ]] = (-2, -1, -1, -1, -1, -1, -1)
     SPRING_FESTIVAL_END_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
-    ]] = (5, 7, 7, 7, 7, 7, 6)
+    ]] = (4, 6, 6, 6, 6, 6, 5)
     SPRING_FESTIVAL_LIEU1_DELTA_DAY: ClassVar[Tuple[
         int, int, int, int, int, int, int
     ]] = (-8, -2, -3, -4, 8, -6, -7)
