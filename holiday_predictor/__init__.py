@@ -168,7 +168,8 @@ class CalculationUtil:
     ]:
         qing_ming_date: datetime.datetime = datetime.datetime(
             year=year, month=4,
-            day=5 if year % 4 or (year % 400 and not year % 100) else 4
+            day=4 if ((not year % 4 and year % 100) or not year % 400) or 
+                ((not (year-1) % 4 and (year-1) % 100) or not (year-1) % 400) else 5
         )
         qing_ming_dateofweek: int = qing_ming_date.weekday()
         # 下述代码对清明假期的调休进行运算。
